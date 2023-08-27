@@ -18,7 +18,7 @@ struct Transaction: Codable {
     struct Vin: Codable {
         let txid: String
         let vout: Int
-        let prevout: Vout
+        let prevout: Vout?
         let scriptsig, scriptsig_asm: String
         let witness: [String]?
         let is_coinbase: Bool
@@ -29,15 +29,17 @@ struct Transaction: Codable {
     struct Vout: Codable {
         let scriptpubkey, scriptpubkey_asm: String
         let scriptpubkey_type: ScriptpubkeyType
-        let scriptpubkey_address: String
+        let scriptpubkey_address: String?
         let value: Int
     }
     
     enum ScriptpubkeyType: String, Codable {
         case p2pkh
         case p2sh
+        case p2pk
         case v0_p2wpkh
         case v0_p2wsh
+        case op_return
     }
 }
 

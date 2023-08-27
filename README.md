@@ -79,6 +79,94 @@ let utxos = try await mempool.addressUTXOs("1wiz18xYmhRX6xStj2b9t1rwWX4GKUgpv")
 
 Get the list of unspent transaction outputs associated with the address/scripthash.
 
+### Get Block
+
+```swift
+let block = try await mempool.block("000000000000000015dc777b3ff2611091336355d3f0ee9766a2cf3be8e4b1ce")
+```
+
+Returns details about a block.
+
+### Hex Block Header
+
+```swift
+let blockHeader = try await mempool.blockHeader("000000000000000015dc777b3ff2611091336355d3f0ee9766a2cf3be8e4b1ce")
+```
+
+Returns the hex-encoded block header.
+
+### Get Block Height
+
+```swift
+let blockHash = try await mempool.blockHeight(800000)
+```
+
+Returns the hash of the block at the input height.
+
+### Get raw Block
+
+```swift
+let rawBlock = try await mempool.blockRaw("0000000000000000000065bda8f8a88f2e1e00d9a6887a43d640e52a4c7660f2")
+```
+
+Returns the raw block representation in Swifts Data Type.
+
+### Block Status
+
+```swift
+let blockStatus = try await mempool.blockStatus("0000000000000000000065bda8f8a88f2e1e00d9a6887a43d640e52a4c7660f2")
+```
+
+Returns the confirmation status of a block.
+
+### Block Tip Height
+
+```swift
+let blockTipHeight = try await mempool.blockTipHeight("0000000000000000000065bda8f8a88f2e1e00d9a6887a43d640e52a4c7660f2")
+```
+
+Returns the height of the last block.
+
+### Block Tip Hash
+
+```swift
+let blockTipHash = try await mempool.blockTipHash("0000000000000000000065bda8f8a88f2e1e00d9a6887a43d640e52a4c7660f2")
+```
+
+Returns the hash of the last block.
+
+### Block Transaction ID
+
+```swift
+let blockTXID = try await mempool.blockTXID(blockHash: "0000000000000000000065bda8f8a88f2e1e00d9a6887a43d640e52a4c7660f2", index: 1)
+```
+
+Returns the transaction at index within the specified block.
+
+### Block Transaction IDs
+
+```swift
+let blockTXIDs = try await mempool.blockTXIDs(blockHash: "0000000000000000000065bda8f8a88f2e1e00d9a6887a43d640e52a4c7660f2", index: 1)
+```
+
+Returns a list of all txids in the block.
+
+### Block Transaction
+
+```swift
+let blockTXIDs = try await mempool.blockTXs("0000000000000000000065bda8f8a88f2e1e00d9a6887a43d640e52a4c7660f2")
+```
+
+Returns a list of 25 transactions in the block.
+
+### Get Blocks
+
+```swift
+let blocks = try await mempool.blocks("0000000000000000000065bda8f8a88f2e1e00d9a6887a43d640e52a4c7660f2")
+```
+
+Returns details on the past 15 blocks with fee and mining details in extras.
+
 ### Warning
 
 Please also note that this package is still in the early stages of development and is therefore still very buggy.
