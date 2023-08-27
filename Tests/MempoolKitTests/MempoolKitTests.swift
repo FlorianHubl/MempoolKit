@@ -2,10 +2,11 @@ import XCTest
 @testable import MempoolKit
 
 final class MempoolKitTests: XCTestCase {
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct
-        // results.
-        XCTAssertEqual(MempoolKit().text, "Hello, World!")
+    @available(iOS 13.0.0, *)
+    func testExample() async throws {
+        let mempool = Mempool()
+        print("Hello")
+        print( try! await mempool.addressTXS("bc1qtluzywsh3y0zxce5rh2j9wm6njz844tz66mg5g"))
+        print("Done")
     }
 }
