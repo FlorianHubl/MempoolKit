@@ -60,8 +60,8 @@ public struct Mempool {
         try await request(for: .address, method: .get, type: Transactions.self, extention: "\(address)/txs")
     }
     
-    func addressTXSChain(_ address: String) async throws -> Transactions {
-        try await request(for: .address, method: .get, type: Transactions.self, extention: "\(address)/txs/chain")
+    func addressTXSChain(_ address: String, lastTXID: String) async throws -> Transactions {
+        try await request(for: .address, method: .get, type: Transactions.self, extention: "\(address)/txs/chain/\(lastTXID)")
     }
     
 }
