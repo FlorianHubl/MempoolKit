@@ -4,7 +4,8 @@ struct Block: Codable {
     let id: String
     let height, version, timestamp, tx_count: Int
     let size, weight: Int
-    let merkle_root, previousblockhash: String
+    let merkle_root: String
+    let previousblockhash: String? // nil at genisis block
     let mediantime, nonce, bits: Int
     let difficulty: Double
     let extras: Extras?

@@ -7,6 +7,16 @@ extension Data {
     }
 }
 
+public enum MempoolError: Error {
+    case tooManyRequests
+    case invalidBitcoinAddress
+    case unknownError
+    case invalidHexString
+    case invalidnumber
+    case blockNotFound
+    case custom(String)
+}
+
 @available(iOS 13.0.0, macOS 12.0.0,  *)
 public struct Mempool {
     
@@ -40,7 +50,7 @@ public struct Mempool {
     
     private func addPayload(payload: String, _ urlr: URLRequest) -> URLRequest {
         var url = urlr
-        print(payload)
+//        print(payload)
         url.httpBody = payload.data(using: .utf8)
         return url
     }
@@ -48,7 +58,7 @@ public struct Mempool {
     private func getRequest(for i: Request, method: HTTPMethod, urlExtention: String? = nil, payLoad: String? = nil) -> URLRequest {
         var request = URLRequest(url: URL(string: "\(url)\(i.rawValue)\(urlExtention != nil ? "/" : "")\(urlExtention ?? "")")!)
         request.httpMethod = method.rawValue
-        print(request.url!.absoluteString)
+//        print(request.url!.absoluteString)
         if let payLoad = payLoad {
             request = addPayload(payload: payLoad, request)
         }
@@ -56,14 +66,17 @@ public struct Mempool {
         return request
     }
     
-    struct MempoolError: Error {
-        let description: String
-    }
-    
     func request<T: Codable>(for req: Request, method: HTTPMethod, type: T.Type, extention: String? = nil) async throws -> T {
         let a = try await URLSession.shared.data(for: getRequest(for: req, method: method, urlExtention: extention)).0
         if type is String.Type {
-            return String(data: a, encoding: .utf8) as! T
+            let b = String(data: a, encoding: .utf8) ?? "Error"
+            if b.contains("Too Many Requests") {
+                throw MempoolError.tooManyRequests
+            }else if b.contains("Block not found") {
+                throw MempoolError.blockNotFound
+            }else {
+                return b as! T
+            }
         }else if type is Data.Type {
             return a as! T
         }else {
@@ -71,7 +84,23 @@ public struct Mempool {
                 let a = try JSONDecoder().decode(T.self, from: a)
                 return a
             }catch {
-                throw MempoolError(description: String(data: a, encoding: .utf8) ?? "Unknown Error")
+                let error = String(data: a, encoding: .utf8)
+                if let error = error {
+                    if error.contains("Too Many Requests") {
+                        throw MempoolError.tooManyRequests
+                    }else if error.contains("Invalid Bitcoin address") {
+                        throw MempoolError.invalidBitcoinAddress
+                    }else if error.contains("Invalid hex string") {
+                        throw MempoolError.invalidHexString
+                    }else if error.contains("Invalid Number") {
+                        throw MempoolError.invalidnumber
+                    }else if error.contains("Block not found") {
+                        throw MempoolError.blockNotFound
+                    }
+                    throw MempoolError.custom(error)
+                }else {
+                    throw MempoolError.unknownError
+                }
             }
         }
     }
@@ -157,3 +186,4 @@ public struct Mempool {
     }
     
 }
+

@@ -9,6 +9,13 @@ A Swift Package that enables to get Bitcoin data through a mempool instance.
 - iOS 13 or higher
 - macOS 12 or higher
 
+## Installation
+
+- Add it using XCode menu **File --> Swift Package --> Add Package Dependency**
+- Add **https://github.com/FlorianHubl/MempoolKit** as Swift Package URL
+- Click on the package
+- Click Add Package and you are done
+
 ## Documentation
 
 ### Create a Instance
@@ -171,6 +178,9 @@ Returns details on the past 15 blocks with fee and mining details in extras.
 
 Please also note that this package is still in the early stages of development and is therefore still very buggy.
 
+Also please report bugs to improve the package.
+
 Every method from Mempool is comming to this Package soon.
 
 Work in progress…
+
