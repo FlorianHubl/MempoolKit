@@ -42,7 +42,7 @@ Returns details about difficulty adjustment.
 ### Address
 
 ```swift
-let difficultyAdjustment = try await mempool.address("1wiz18xYmhRX6xStj2b9t1rwWX4GKUgpv")
+let address = try await mempool.address("1wiz18xYmhRX6xStj2b9t1rwWX4GKUgpv")
 ```
 
 Returns details about an address.
@@ -50,7 +50,7 @@ Returns details about an address.
 ### Address Transactions
 
 ```swift
-let difficultyAdjustment = try await mempool.addressTXS("1wiz18xYmhRX6xStj2b9t1rwWX4GKUgpv")
+let txs = try await mempool.addressTXS("1wiz18xYmhRX6xStj2b9t1rwWX4GKUgpv")
 ```
 
 Get transaction history for the specified address/scripthash, sorted with newest first. Returns up to 50 mempool transactions plus the first 25 confirmed transactions. You can request more confirmed transactions using addressTXSChain.
@@ -58,10 +58,26 @@ Get transaction history for the specified address/scripthash, sorted with newest
 ### Address Transactions Chain
 
 ```swift
-let difficultyAdjustment = try await mempool.addressTXSChain("1wiz18xYmhRX6xStj2b9t1rwWX4GKUgpv", lastTXID: "277bbdc3557f163810feea810bf390ed90724ec75de779ab181b865292bb1dc1")
+let txs = try await mempool.addressTXSChain("1wiz18xYmhRX6xStj2b9t1rwWX4GKUgpv", lastTXID: "277bbdc3557f163810feea810bf390ed90724ec75de779ab181b865292bb1dc1")
 ```
 
 Get confirmed transaction history for the specified address/scripthash, sorted with newest first. Returns 25 transactions per page. More can be requested by specifying the last txid seen by the previous call.
+
+### Address Transactions Mempool
+
+Get unconfirmed transaction history for the specified address/scripthash. Returns up to 50 transactions (no paging).
+
+```swift
+let txsMempool = try await mempool.addressTXSMempool("1wiz18xYmhRX6xStj2b9t1rwWX4GKUgpv")
+```
+
+### Address UTXOs
+
+```swift
+let utxos = try await mempool.addressUTXOs("1wiz18xYmhRX6xStj2b9t1rwWX4GKUgpv")
+```
+
+Get the list of unspent transaction outputs associated with the address/scripthash.
 
 ### Warning
 

@@ -64,5 +64,13 @@ public struct Mempool {
         try await request(for: .address, method: .get, type: Transactions.self, extention: "\(address)/txs/chain/\(lastTXID)")
     }
     
+    func addressTXSMempool(_ address: String) async throws -> Transactions {
+        try await request(for: .address, method: .get, type: Transactions.self, extention: "\(address)/txs/mempool")
+    }
+    
+    func addressUTXOs(_ address: String) async throws -> UTXOs {
+        try await request(for: .address, method: .get, type: UTXOs.self, extention: "\(address)/utxo")
+    }
+    
 }
 
