@@ -1,6 +1,6 @@
 # MempoolKit
 
-<img src="https://github.com/FlorianHubl/MempoolKit/blob/main/Animation.gif" width="173" height="173">
+<img src="https://github.com/FlorianHubl/MempoolKit/blob/main/Animation.gif">
 
 A Swift Package that enables to get Bitcoin data through a Mempool instance.
 
