@@ -4,8 +4,7 @@ import XCTest
 final class MempoolKitTests: XCTestCase {
     @available(iOS 13.0.0, *)
     func test() async throws {
-        let mempool = Mempool()
-        let a = try await mempool.mempoolRecent()
+        try await mainTest()
     }
     
     @available(iOS 13.0.0, *)
@@ -13,18 +12,15 @@ final class MempoolKitTests: XCTestCase {
         
         let mempool = Mempool()
         
-        // Testing from genisis Block to Block 1000 with counting UTXOs from Coinbase Address.
+        // Testing from Block 700000 Block to Block 700100 with counting UTXOs from the first Address.
         
-        for i in 0...1000 {
+        for i in 700000...700100 {
             let blockHash = try await mempool.blockHeight(blockHeight: i)
-            let block = try await mempool.block(blockHash: blockHash)
-            print("Block: \(i): \(blockHash)")
-            if let extras = block.extras {
-                let coinbaseAddress = extras.coinbaseAddress
-                let address = try await mempool.addressUTXOs(address: coinbaseAddress)
-                print("Coinbase Address: \(coinbaseAddress) UTXOs: \(address.count)")
+            let txs = try await mempool.blockTXs(blockHash: blockHash)
+            if let firstOut = txs.first?.vout.first?.scriptpubkey_address {
+                let address = try await mempool.addressUTXOs(address: firstOut)
+                print("Address: \(firstOut) UTXOs: \(address.count)")
             }
-            try await Task.sleep(nanoseconds: 1_000_000_000)
         }
     }
 }

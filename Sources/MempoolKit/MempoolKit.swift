@@ -90,7 +90,7 @@ public struct Mempool {
     private func getRequest(for i: Request, method: HTTPMethod, urlExtention: String? = nil, payLoad: String? = nil) -> URLRequest {
         var request = URLRequest(url: URL(string: "\(url)\(i.rawValue)\(urlExtention != nil ? "/" : "")\(urlExtention ?? "")")!)
         request.httpMethod = method.rawValue
-//        print(request.url!.absoluteString)
+        print(request.url!.absoluteString)
         if let payLoad = payLoad {
             request = addPayload(payload: payLoad, request)
         }
@@ -131,7 +131,7 @@ public struct Mempool {
                     }else if error.contains("This mining pool does not exist") {
                         throw MempoolError.miningPoolDoesNotExist
                     }
-                    throw MempoolError.custom(error)
+                    throw MempoolError.custom("Unknown Error")
                 }else {
                     throw MempoolError.unknownError
                 }
