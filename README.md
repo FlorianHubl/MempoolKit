@@ -275,6 +275,46 @@ let blockSizeAndWeights = try await mempool.blockSizeAndWeights(time: .oneYear)
 
 Returns average size (bytes) and average weight (weight units) for blocks in the specified time, ordered oldest to newest.
 
+### Mempool Block Fees
+
+```swift
+let mempoolBlockFees = try await mempool.mempoolBlockFees()
+```
+
+Returns the current mempool as projected blocks.
+
+### Recommended Fees
+
+```swift
+let recommendedFees = try await mempool.recommendedFees()
+```
+
+Returns the currently suggested fees for new transactions.
+
+### Mempool
+
+```swift
+let mempool = try await mempool.mempool()
+```
+
+Returns the current mempool backlog statistics.
+
+### Mempool Transaction IDs
+
+```swift
+let mempoolTXIDs = try await mempool.mempoolTXIDs()
+```
+
+Returns the full list of transaction IDs in the mempool as an array. The order of the transaction IDs is arbitrary and does not match bitcoind.
+
+### Mempool Recent
+
+```swift
+let mempoolRecent = try await mempool.mempoolRecent()
+```
+
+Returns a list of the last 10 transactions to enter the mempool. Each transaction object contains simplified overview data.
+
 
 ### Warning
 

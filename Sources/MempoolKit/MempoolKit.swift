@@ -54,6 +54,11 @@ public struct Mempool {
         case blockRewards = "/api/v1/mining/blocks/rewards"
         case blockFeeRats = "/api/v1/mining/blocks/fee-rates"
         case blockSizeAndWeights = "/api/v1/mining/blocks/sizes-weights"
+        case mempoolBlockFees = "/api/v1/fees/mempool-blocks"
+        case recommendedFees = "/api/v1/fees/recommended"
+        case mempool = "/api/mempool"
+        case mempoolTXIDs = "/api/mempool/txids"
+        case mempoolRecent = "/api/mempool/recent"
     }
 
     enum HTTPMethod: String {
@@ -85,7 +90,7 @@ public struct Mempool {
     private func getRequest(for i: Request, method: HTTPMethod, urlExtention: String? = nil, payLoad: String? = nil) -> URLRequest {
         var request = URLRequest(url: URL(string: "\(url)\(i.rawValue)\(urlExtention != nil ? "/" : "")\(urlExtention ?? "")")!)
         request.httpMethod = method.rawValue
-        print(request.url!.absoluteString)
+//        print(request.url!.absoluteString)
         if let payLoad = payLoad {
             request = addPayload(payload: payLoad, request)
         }

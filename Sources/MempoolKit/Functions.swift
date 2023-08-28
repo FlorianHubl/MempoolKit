@@ -222,6 +222,38 @@ public extension Mempool {
     
     // Fees
     
+    /// Mempool Block Fees
+    /// - Returns: Current mempool as projected blocks.
+    func mempoolBlockFees() async throws -> MempoolBlockFees {
+        try await request(for: .mempoolBlockFees, method: .get, type: MempoolBlockFees.self)
+    }
+    
+    /// Recommended Fees
+    /// - Returns: The currently suggested fees for new transactions.
+    func recommendedFees() async throws -> RecommendedFees {
+        try await request(for: .recommendedFees, method: .get, type: RecommendedFees.self)
+    }
+    
+    // Mempool
+    
+    /// Mempool
+    /// - Returns: Current mempool backlog statistics.
+    func mempool() async throws -> MempoolStatistic {
+        try await request(for: .mempool, method: .get, type: MempoolStatistic.self)
+    }
+    
+    /// Mempool Transaction IDs
+    /// - Returns: The full list of transaction IDs in the mempool as an array. The order of the transaction IDs is arbitrary and does not match bitcoind.
+    func mempoolTXIDs() async throws -> [String] {
+        try await request(for: .mempoolTXIDs, method: .get, type: [String].self)
+    }
+    
+    /// Mempool Recent
+    /// - Returns: A list of the last 10 transactions to enter the mempool. Each transaction object contains simplified overview data.
+    func mempoolRecent() async throws -> MempoolRecents {
+        try await request(for: .mempoolRecent, method: .get, type: MempoolRecents.self)
+    }
+    
 }
 
 
