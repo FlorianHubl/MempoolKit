@@ -1,6 +1,6 @@
 # MempoolKit
 
-<img src="https://github.com/FlorianHubl/MempoolKit/blob/main/Animation.gif">
+<img src="https://github.com/FlorianHubl/MempoolKit/blob/main/Wallpaper.gif">
 
 A Swift Package that enables to get Bitcoin data through a Mempool instance.
 
@@ -18,7 +18,7 @@ A Swift Package that enables to get Bitcoin data through a Mempool instance.
 
 ## DocC Documentation
 
-The Package is fully documented in docC. Open the documentation window in xCode to read the documentation.
+The Package is fully documented with DocC. Open the documentation window in xCode to read the documentation.
 There will also be Tutorials in the documentation in the future which explane how to use the package with SwiftUI.
 
 ## Documentation

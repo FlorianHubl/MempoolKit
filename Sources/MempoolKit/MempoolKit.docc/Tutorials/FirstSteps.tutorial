@@ -8,7 +8,7 @@
         @ContentAndMedia {
             Create the first instance of Mempool.
             
-            @Image(source: Blocks.png, alt: "Blocks")
+            @Image(source: Animation.gif, alt: "Blocks")
         }
         
         @Steps {

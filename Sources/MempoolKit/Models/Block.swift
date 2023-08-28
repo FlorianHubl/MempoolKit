@@ -13,7 +13,7 @@ public struct Block: Codable {
     struct Extras: Codable {
         let totalFees: Int
         let medianFee: Int
-        let feeRange: [Int]
+        let feeRange: [Double]?
         let reward: Int
         let pool: Pool
         let avgFee: Int
@@ -22,7 +22,7 @@ public struct Block: Codable {
         let coinbaseAddress: String
         let coinbaseSignature: String
         let coinbaseSignatureAscii: String
-        let avgTxSize: Int
+        let avgTxSize: Double
         let totalInputs: Int
         let totalOutputs: Int
         let totalOutputAmt: Int
@@ -53,4 +53,4 @@ public struct Block: Codable {
     }
 }
 
-typealias Blocks = [Block]
+public typealias Blocks = [Block]

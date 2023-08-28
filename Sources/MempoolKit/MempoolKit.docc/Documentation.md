@@ -7,7 +7,7 @@ A Swift Package that enables to get Bitcoin data through a Mempool instance.
 This Swift Package gives you the power to get Data from the Bitcoin Network quick and easy.
 You can connect your own instance of mempool or use mempool.space.
 
-![](Wallpaper.png)
+![](Wallpaper.gif)
 
 ### Get started
 

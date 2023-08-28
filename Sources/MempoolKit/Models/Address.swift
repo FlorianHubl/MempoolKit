@@ -1,6 +1,7 @@
 
 import Foundation
 
+/// Information about a Bitcoin Address
 public struct Address: Codable {
     let address: String
     let chain_stats, mempool_stats: Stats

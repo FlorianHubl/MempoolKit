@@ -1,12 +1,18 @@
 @Tutorials(name: "MempoolKit") {
     @Intro(title: "Meet MempoolKit") {
         Get Bitcoin data through a Mempool instance
-        @Image(source: Wallpaper.png, alt: "Wallpaper")
+        @Image(source: Wallpaper.gif, alt: "Wallpaper")
     }
     
     @Chapter(name: "First Steps") {
         @Image(source: Blocks.png, alt: "Animation")
         This Tutorial guides you how to use MempoolKit. Create the first instance, get the lastest block height, block hash and block information.
         @TutorialReference(tutorial: "doc:FirstSteps")
+    }
+    
+    @Chapter(name: "Mempool App") {
+        @Image(source: Animation.gif, alt: "Animation")
+        In this tutorial we gonna create a demo Mempool App in which loads the current blocks. We build an interactive User Interface with SwiftUI and use MempoolKit as the connection with the Bitcoin Network.
+        @TutorialReference(tutorial: "doc:Mempool App")
     }
 }
