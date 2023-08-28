@@ -179,6 +179,103 @@ let blocks = try await mempool.blocks(blockHash: "0000000000000000000065bda8f8a8
 
 Returns details on the past 15 blocks with fee and mining details in extras.
 
+### Mining Pools
+
+```swift
+let miningPools = try await mempool.miningPools(time. .oneYear)
+```
+
+Returns a list of all known mining pools ordered by blocks found over the specified time.
+
+### Mining Pool
+
+```swift
+let miningPool = try await mempool.miningPool(miningPool: "AntPool")
+```
+
+Returns Details about the mining pool.
+
+### Mining Pool Hashrates
+
+```swift
+let miningPoolHashrates = try await mempool.miningPoolHashrates(time: .oneYear)
+```
+
+Returns the Average hashrates (and share of total hashrate) of mining pools active in the specified time, in descending order of hashrate.
+
+### Mining Pool Hashrate
+
+```swift
+let miningPoolHashrate = try await mempool.miningPoolHashrate(miningPool: "AntPool")
+```
+
+Returns all known hashrate data for the mining pool specified by the name. Hashrate values are weekly averages.
+
+### Mining Pool Hashrate
+
+```swift
+let miningPoolHashrate = try await mempool.miningPoolHashrate(miningPool: "AntPool")
+```
+
+Returns all known hashrate data for the mining pool specified by the name. Hashrate values are weekly averages.
+
+### Mining Pool Blocks
+
+```swift
+let miningPoolBlocks = try await mempool.miningPoolBlocks(miningPool: "AntPool", blockHeight: 730000)
+```
+
+Returns past 10 blocks mined by the specified mining pool before the specified blockHeight. If no blockHeight is specified, the mining pool's 10 most recent blocks are returned.
+
+### Mining Hashrate
+
+```swift
+let miningHashrate = try await mempool.miningHashrate(time: .oneYear)
+```
+
+Returns Network-wide hashrate and difficulty figures over the specified time.
+
+### Mining Reward Statistic
+
+```swift
+let miningRewardStats = try await mempool.miningRewardStats(blockcount: 100)
+```
+
+Returns Block reward and total transactions confirmed for the past specified blocks.
+
+### Mining Block Fees
+
+```swift
+let blockFees = try await mempool.blockFees(time: .oneYear)
+```
+
+Returns Average total fees for blocks in the specified time, ordered oldest to newest.
+
+### Mining Block Rewards
+
+```swift
+let blockRewards = try await mempool.blockRewards(time: .oneYear)
+```
+
+Returns Average block rewards for blocks in the specified time, ordered oldest to newest.
+
+### Mining Block Fee Rats
+
+```swift
+let blockFeeRates = try await mempool.blockFeeRates(time: .oneYear)
+```
+
+Returns Average feerate percentiles for blocks in the specified time, ordered oldest to newest.
+
+### Mining Block Size And Weights
+
+```swift
+let blockSizeAndWeights = try await mempool.blockSizeAndWeights(time: .oneYear)
+```
+
+Returns average size (bytes) and average weight (weight units) for blocks in the specified time, ordered oldest to newest.
+
+
 ### Warning
 
 Please also note that this package is still in the early stages of development and is therefore still very buggy.

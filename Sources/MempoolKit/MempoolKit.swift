@@ -48,6 +48,12 @@ public struct Mempool {
         case miningPools = "/api/v1/mining/pools"
         case miningPool = "/api/v1/mining/pool"
         case miningPoolHashrate = "/api/v1/mining/hashrate/pools"
+        case hashrate = "/api/v1/mining/hashrate"
+        case reward = "/api/v1/mining/reward-stats"
+        case blockFees = "/api/v1/mining/blocks/fees"
+        case blockRewards = "/api/v1/mining/blocks/rewards"
+        case blockFeeRats = "/api/v1/mining/blocks/fee-rates"
+        case blockSizeAndWeights = "/api/v1/mining/blocks/sizes-weights"
     }
 
     enum HTTPMethod: String {
@@ -129,6 +135,8 @@ public struct Mempool {
     }
     
     public enum MempoolTime: String {
+        case oneDay = "24h"
+        case threeDays = "3d"
         case oneWeek = "1w"
         case oneMonth = "1m"
         case threeMonths = "3n"

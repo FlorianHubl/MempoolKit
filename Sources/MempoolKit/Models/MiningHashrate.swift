@@ -8,4 +8,3 @@ public struct MiningPoolHashrate: Codable {
 }
 
 public typealias MiningPoolHashrates = [MiningPoolHashrate]
-

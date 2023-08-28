@@ -42,14 +42,14 @@ public extension Mempool {
     
     /// Address Transactions Mempool
     /// - Parameter address: Bitcoin Address
-    /// - Returns: Get unconfirmed transaction history for the specified address/scripthash. Returns up to 50 transactions (no paging)
+    /// - Returns: Unconfirmed transaction history for the specified address/scripthash. Returns up to 50 transactions (no paging)
     func addressTXSMempool(address: String) async throws -> Transactions {
         try await request(for: .address, method: .get, type: Transactions.self, extention: "\(address)/txs/mempool")
     }
     
     /// Address UTXOs
     /// - Parameter address: Bitcoin Address
-    /// - Returns: Get the list of unspent transaction outputs associated with the address
+    /// - Returns: The list of unspent transaction outputs associated with the address
     func addressUTXOs(address: String) async throws -> UTXOs {
         try await request(for: .address, method: .get, type: UTXOs.self, extention: "\(address)/utxo")
     }
@@ -114,21 +114,21 @@ public extension Mempool {
     
     /// Block Transaction IDs
     /// - Parameter blockHash: The Blocks Hash or ID
-    /// - Returns: Returns a list of all Transaction IDs in the block.
+    /// - Returns: A list of all Transaction IDs in the block.
     func blockTXIDs(blockHash: String) async throws -> [String] {
         try await request(for: .block, method: .get, type: [String].self, extention: "\(blockHash)/txids")
     }
     
     /// Block Transaction
     /// - Parameter blockHash: The Blocks Hash or ID
-    /// - Returns: Returns a list of 25 transactions in the block.
+    /// - Returns: A list of 25 transactions in the block.
     func blockTXs(blockHash: String) async throws -> Transactions {
         try await request(for: .block, method: .get, type: Transactions.self, extention: "\(blockHash)/txs")
     }
     
     /// Get Blocks
     /// - Parameter blockHeight: The Blocks Hash or ID
-    /// - Returns: Returns details on the past 15 blocks with fee and mining details in extras
+    /// - Returns: Details on the past 15 blocks with fee and mining details in extras
     func blocks(blockHeight: Int) async throws -> String {
         try await request(for: .blocks, method: .get, type: String.self, extention: "\(blockHeight)")
     }
@@ -142,8 +142,8 @@ public extension Mempool {
     // Mining
     
     /// Mining Pools
-    /// - Parameter time: The specified time: 1 week, 1 month, 3 months, 6 months, one year, two years or three years
-    /// - Returns: Returns a list of all known mining pools ordered by blocks found over the specified time.
+    /// - Parameter time: The specified time: 1 day, 3 days, 1 week, 1 month, 3 months, 6 months, one year, two years or three years
+    /// - Returns: A list of all known mining pools ordered by blocks found over the specified time.
     func miningPools(time: MempoolTime) async throws -> MiningPools {
         try await request(for: .miningPools, method: .get, type: MiningPools.self, extention: time.rawValue)
     }
@@ -156,7 +156,7 @@ public extension Mempool {
     }
     
     /// Mining Pool Hashrates
-    /// - Parameter time: The specified time: 1 week, 1 month, 3 months, 6 months, one year, two years or three years
+    /// - Parameter time: The specified time: 1 day, 3 days, 1 week, 1 month, 3 months, 6 months, one year, two years or three years
     /// - Returns: Average hashrates (and share of total hashrate) of mining pools active in the specified time, in descending order of hashrate.
     func miningPoolHashrates(time: MempoolTime) async throws -> MiningPoolHashrates {
         try await request(for: .miningPoolHashrate, method: .get, type: MiningPoolHashrates.self, extention: time.rawValue)
@@ -164,7 +164,7 @@ public extension Mempool {
     
     /// Mining Pool Hashrate
     /// - Parameter miningPool: Name of the Mining Pool
-    /// - Returns: Returns all known hashrate data for the mining pool specified by the name. Hashrate values are weekly averages.
+    /// - Returns: All known hashrate data for the mining pool specified by the name. Hashrate values are weekly averages.
     func miningPoolHashrate(miningPool: String) async throws -> MiningPoolHashrates {
         try await request(for: .miningPool, method: .get, type: MiningPoolHashrates.self, extention: "\(miningPool)/hashrate")
     }
@@ -173,12 +173,59 @@ public extension Mempool {
     /// - Parameters:
     ///   - miningPool: Name of the Mining Pool
     ///   - blockHeight: Height of the block
-    /// - Returns: past 10 blocks mined by the specified mining pool before the specified blockHeight. If no blockHeight is specified, the mining pool's 10 most recent blocks are returned.
+    /// - Returns: Past 10 blocks mined by the specified mining pool before the specified blockHeight. If no blockHeight is specified, the mining pool's 10 most recent blocks are returned.
     func miningPoolBlocks(miningPool: String, blockHeight: Int? = nil) async throws -> Blocks {
         try await request(for: .miningPool, method: .get, type: Blocks.self, extention: "\(miningPool)/blocks/\(blockHeight != nil ? String(blockHeight!) : "")")
     }
     
+    /// Hashrate and Difficulty
+    /// - Parameter time: The specified time: 1 day, 3 days, 1 week, 1 month, 3 months, 6 months, one year, two years or three years
+    /// - Returns: Network-wide hashrate and difficulty figures over the specified time.
+    func miningHashrate(time: MempoolTime) async throws -> Hashrate {
+        try await request(for: .hashrate, method: .get, type: Hashrate.self, extention: time.rawValue)
+    }
+    
+    /// Mining Reward Stats
+    /// - Parameter blockCount: specified block count
+    /// - Returns: Block reward and total transactions confirmed for the past specified blocks.
+    func miningRewardStats(blockCount: Int) async throws -> MiningRewardStats {
+        try await request(for: .reward, method: .get, type: MiningRewardStats.self, extention: "\(blockCount)")
+    }
+    
+    /// Block Fees
+    /// - Parameter time: The specified time: 1 day, 3 days, 1 week, 1 month, 3 months, 6 months, one year, two years or three years
+    /// - Returns: Average total fees for blocks in the specified time, ordered oldest to newest.
+    func blockFees(time: MempoolTime) async throws -> BlockFees {
+        try await request(for: .blockFees, method: .get, type: BlockFees.self, extention: time.rawValue)
+    }
+    
+    /// Block Rewards
+    /// - Parameter time: The specified time: 1 day, 3 days, 1 week, 1 month, 3 months, 6 months, one year, two years or three years
+    /// - Returns: Average block rewards for blocks in the specified time, ordered oldest to newest.
+    func blockRewards(time: MempoolTime) async throws -> BlockRewards {
+        try await request(for: .blockRewards, method: .get, type: BlockRewards.self, extention: time.rawValue)
+    }
+    
+    /// Block Fee Rats
+    /// - Parameter time: The specified time: 1 day, 3 days, 1 week, 1 month, 3 months, 6 months, one year, two years or three years
+    /// - Returns: Average feerate percentiles for blocks in the specified time, ordered oldest to newest.
+    func blockFeeRates(time: MempoolTime) async throws -> BlockFeeRates {
+        try await request(for: .blockFeeRats, method: .get, type: BlockFeeRates.self, extention: time.rawValue)
+    }
+    
+    /// Block Size And Weights
+    /// - Parameter time: The specified time: 1 day, 3 days, 1 week, 1 month, 3 months, 6 months, one year, two years or three years
+    /// - Returns: Average size (bytes) and average weight (weight units) for blocks in the specified time, ordered oldest to newest.
+    func blockSizeAndWeights(time: MempoolTime) async throws -> BlockSizeAndWeights {
+        try await request(for: .blockSizeAndWeights, method: .get, type: BlockSizeAndWeights.self, extention: time.rawValue)
+    }
+    
+    // Fees
+    
 }
+
+
+
 
 
 
