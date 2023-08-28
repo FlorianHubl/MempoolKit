@@ -1,7 +1,7 @@
 
 import Foundation
 
-struct UTXO: Codable {
+public struct UTXO: Codable {
     let txid: String
     let vout: Int
     let status: Status
@@ -15,4 +15,4 @@ struct UTXO: Codable {
     }
 }
 
-typealias UTXOs = [UTXO]
+public typealias UTXOs = [UTXO]

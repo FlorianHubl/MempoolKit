@@ -1,6 +1,6 @@
 import Foundation
 
-struct Transaction: Codable {
+public struct Transaction: Codable {
     let txid: String
     let version, locktime: Int
     let vin: [Vin]
@@ -43,4 +43,4 @@ struct Transaction: Codable {
     }
 }
 
-typealias Transactions = [Transaction]
+public typealias Transactions = [Transaction]

@@ -17,6 +17,21 @@ public enum MempoolError: Error {
     case custom(String)
 }
 
+/// The Main Struct of MempoolKit.
+///
+/// Get data easy and quick from the Bitcoin Network through your own instance of Mempool or the official mempool.space api.
+///
+/// Official mempool.space api:
+/// ```swift
+/// let mempool = Mempool()
+/// ```
+///
+/// Your own instance of Mempool:
+///
+/// ```swift
+/// let mempool = Mempool(server: "https://mymempoolserver.local")
+/// ```
+
 @available(iOS 13.0.0, macOS 12.0.0,  *)
 public struct Mempool {
     
@@ -40,10 +55,12 @@ public struct Mempool {
     
     let url: String
 
+    /// The initialiser for the official mempool.space api.
     public init() {
         self.url = "https://mempool.space"
     }
     
+    /// The initialiser for a self hosted instance of mempool.
     public init(server: String) {
         self.url = server
     }
@@ -107,76 +124,83 @@ public struct Mempool {
     
     // General
     
-    func difficultyAdjustment() async throws -> DifficultyAdjustment {
+    /// Information about the difficulty adjustment such as previousRetarget, progressPercent and many more.
+    ///
+    /// - Returns: All Details about the difficulty adjustment: progressPercent, difficultyChange, estimatedRetargetDate, remainingBlocks, remainingTime, previousRetarget, nextRetargetHeight, timeAvg, timeOffset
+    public func difficultyAdjustment() async throws -> DifficultyAdjustment {
         try await request(for: .difficultyAdjustment, method: .get, type: DifficultyAdjustment.self)
     }
     
     // Addresses
     
-    func address(_ address: String) async throws -> Address {
+    /// <#Description#>
+    /// - Parameter address: Bitcoin Address
+    /// - Returns: Details about difficulty adjustment.
+    
+    public func address(address: String) async throws -> Address {
         try await request(for: .address, method: .get, type: Address.self, extention: address)
     }
     
-    func addressTXS(_ address: String) async throws -> Transactions {
+    public func addressTXS(address: String) async throws -> Transactions {
         try await request(for: .address, method: .get, type: Transactions.self, extention: "\(address)/txs")
     }
     
-    func addressTXSChain(_ address: String, lastTXID: String) async throws -> Transactions {
+    public func addressTXSChain(address: String, lastTXID: String) async throws -> Transactions {
         try await request(for: .address, method: .get, type: Transactions.self, extention: "\(address)/txs/chain/\(lastTXID)")
     }
     
-    func addressTXSMempool(_ address: String) async throws -> Transactions {
+    public func addressTXSMempool(address: String) async throws -> Transactions {
         try await request(for: .address, method: .get, type: Transactions.self, extention: "\(address)/txs/mempool")
     }
     
-    func addressUTXOs(_ address: String) async throws -> UTXOs {
+    public func addressUTXOs(address: String) async throws -> UTXOs {
         try await request(for: .address, method: .get, type: UTXOs.self, extention: "\(address)/utxo")
     }
     
     // Blocks
     
-    func block(_ id: String) async throws -> Block {
-        try await request(for: .block, method: .get, type: Block.self, extention: id)
+    public func block(blockHash: String) async throws -> Block {
+        try await request(for: .block, method: .get, type: Block.self, extention: blockHash)
     }
     
-    func blockHeader(_ id: String) async throws -> String {
-        try await request(for: .block, method: .get, type: String.self, extention: "\(id)/header")
+    public func blockHeader(blockHash: String) async throws -> String {
+        try await request(for: .block, method: .get, type: String.self, extention: "\(blockHash)/header")
     }
     
-    func blockHeight(_ height: Int) async throws -> String {
-        try await request(for: .blockheight, method: .get, type: String.self, extention: "\(height)")
+    public func blockHeight(blockHeight: Int) async throws -> String {
+        try await request(for: .blockheight, method: .get, type: String.self, extention: "\(blockHeight)")
     }
     
-    func blockRaw(_ hash: String) async throws -> Data {
-        try await request(for: .block, method: .get, type: Data.self, extention: "\(hash)/raw")
+    public func blockRaw(blockHash: String) async throws -> Data {
+        try await request(for: .block, method: .get, type: Data.self, extention: "\(blockHash)/raw")
     }
     
-    func blockStatus(_ hash: String) async throws -> BlockStatus {
-        try await request(for: .block, method: .get, type: BlockStatus.self, extention: "\(hash)/status")
+    public func blockStatus(blockHash: String) async throws -> BlockStatus {
+        try await request(for: .block, method: .get, type: BlockStatus.self, extention: "\(blockHash)/status")
     }
     
-    func blockTipHeight() async throws -> Int {
+    public func blockTipHeight() async throws -> Int {
         try await request(for: .blockTipHeight, method: .get, type: Int.self)
     }
     
-    func blockTipHash() async throws -> String {
+    public func blockTipHash() async throws -> String {
         try await request(for: .blockTipHash, method: .get, type: String.self)
     }
     
-    func blockTXID(blockHash: String, index: Int) async throws -> String {
+    public func blockTXID(blockHash: String, index: Int) async throws -> String {
         try await request(for: .block, method: .get, type: String.self, extention: "\(blockHash)/txid/\(index)")
     }
     
-    func blockTXIDs(blockHash: String) async throws -> [String] {
+    public func blockTXIDs(blockHash: String) async throws -> [String] {
         try await request(for: .block, method: .get, type: [String].self, extention: "\(blockHash)/txids")
     }
     
-    func blockTXs(_ blockHash: String) async throws -> Transactions {
+    public func blockTXs(blockHash: String) async throws -> Transactions {
         try await request(for: .block, method: .get, type: Transactions.self, extention: "\(blockHash)/txs")
     }
     
-    func blocks(_ height: Int) async throws -> String {
-        try await request(for: .blocks, method: .get, type: String.self, extention: "\(height)")
+    public func blocks(blockHeight: Int) async throws -> String {
+        try await request(for: .blocks, method: .get, type: String.self, extention: "\(blockHeight)")
     }
     
     // Disabled

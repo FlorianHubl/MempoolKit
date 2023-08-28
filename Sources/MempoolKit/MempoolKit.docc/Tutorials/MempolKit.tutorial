@@ -1,0 +1,12 @@
+@Tutorials(name: "MempoolKit") {
+    @Intro(title: "Meet MempoolKit") {
+        Get Bitcoin data through a Mempool instance
+        @Image(source: Wallpaper.png, alt: "Wallpaper")
+    }
+    
+    @Chapter(name: "First Steps") {
+        @Image(source: Blocks.png, alt: "Animation")
+        This Tutorial guides you how to use MempoolKit. Create the first instance, get the lastest block height, block hash and block information.
+        @TutorialReference(tutorial: "doc:FirstSteps")
+    }
+}

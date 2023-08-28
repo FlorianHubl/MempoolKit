@@ -1,6 +1,6 @@
 import Foundation
 
-struct Block: Codable {
+public struct Block: Codable {
     let id: String
     let height, version, timestamp, tx_count: Int
     let size, weight: Int
