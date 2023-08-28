@@ -16,10 +16,12 @@ A Swift Package that enables to get Bitcoin data through a Mempool instance.
 - Click on the package
 - Click Add Package and you are done
 
-## Documentation
+## DocC Documentation
 
 The Package is fully documented in docC. Open the documentation window in xCode to read the documentation.
 There will also be Tutorials in the documentation in the future which explane how to use the package with SwiftUI.
+
+## Documentation
 
 ### Create a Instance
 
