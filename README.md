@@ -547,7 +547,4 @@ Please also note that this package is still in the early stages of development a
 
 Also please report bugs to improve the package.
 
-Every method from Mempool is comming to this Package soon.
-
 Work in progress…
-
