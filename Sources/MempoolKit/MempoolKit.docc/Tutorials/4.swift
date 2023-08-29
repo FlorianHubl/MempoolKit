@@ -6,10 +6,16 @@ struct ContentView: View {
     
     let mempool = Mempool()
     
+    @State private var blocks = Blocks()
+    
     var body: some View {
-        NavigationStack {
+        NavigationStack {
             Form {
-                
+                ForEach(blocks) { block in
+                    Button("\(block.height)") {
+                        
+                    }
+                }
             }
         }
     }

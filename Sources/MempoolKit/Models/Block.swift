@@ -1,6 +1,6 @@
 import Foundation
 
-public struct Block: Codable, Identifiable {
+public struct Block: Codable, Identifiable, Hashable {
     public let id: String
     public let height, version, timestamp, tx_count: Int
     public let size, weight: Int
@@ -10,7 +10,7 @@ public struct Block: Codable, Identifiable {
     public let difficulty: Double
     public let extras: Extras?
     
-    public struct Extras: Codable {
+    public struct Extras: Codable, Hashable {
         public let totalFees: Int
         public let medianFee: Int
         public let feeRange: [Double]?
@@ -46,7 +46,7 @@ public struct Block: Codable, Identifiable {
         
     }
     
-    public struct Pool: Codable {
+    public struct Pool: Codable, Hashable {
         public let id: Int
         public let name: String
         public let slug: String
