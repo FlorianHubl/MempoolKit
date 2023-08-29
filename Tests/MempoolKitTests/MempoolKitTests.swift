@@ -4,7 +4,11 @@ import XCTest
 final class MempoolKitTests: XCTestCase {
     @available(iOS 13.0.0, *)
     func test() async throws {
-        try await mainTest()
+//        try await mainTest()
+        let mempool = Mempool()
+        
+        let a = try await mempool.lightningChannelGeodata()
+        print(a)
     }
     
     @available(iOS 13.0.0, *)

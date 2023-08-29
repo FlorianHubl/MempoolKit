@@ -254,6 +254,8 @@ public extension Mempool {
         try await request(for: .mempoolRecent, method: .get, type: MempoolRecents.self)
     }
     
+    // Transactions
+    
     /// Children Pay For Parrent
     /// - Parameter txid: Transaction ID
     /// - Returns: The ancestors and the best descendant fees for a transaction.
@@ -326,5 +328,113 @@ public extension Mempool {
     func sendTransaction(hex: String) async throws -> String {
         try await request(for: .transaction, method: .post, type: String.self, payLoad: hex)
     }
+    
+    // Lightning
+    
+    /// Lightning Network Statistic
+    /// - Parameter time: Time
+    /// - Returns: Network-wide stats such as total number of channels and nodes, total capacity, and average/median fee figures.
+    func lightningStatistic(time: MempoolTime) async throws -> LightningStatistics {
+        try await request(for: .lightning, method: .get, type: LightningStatistics.self, extention: time.rawValue)
+    }
+    
+    /// Search Lightning Nodes and Lightning Channels
+    /// - Parameter node: Lightning Node aliases, node pubkeys, channel IDs, and short channel IDs.
+    /// - Returns: Lightning nodes and channels that match the full-text, case-insensitive.
+    func lightningNodes(node: String) async throws -> LightningNodes {
+        try await request(for: .channel, method: .get, type: LightningNodes.self, extention: node)
+    }
+    
+    /// Search Lightning Nodes in a Country
+    /// - Parameter country: country name in two letters ISO Alpha-2 country code
+    /// - Returns: A list of Lightning nodes running on clearnet in the requested country.
+    func lightningNodesInCountry(country: CountryCode) async throws -> LightningNodesCountry {
+        try await request(for: .country, method: .get, type: LightningNodesCountry.self, extention: country.rawValue)
+    }
+    
+    /// Statistic about Lightning Nodes per country
+    /// - Returns: Aggregate capacity and number of clearnet nodes per country. Capacity figures are in satoshis.
+    func lightningNodesStatisticsPerCountry() async throws -> LightningNodesCountry {
+        try await request(for: .countries, method: .get, type: LightningNodesCountry.self)
+    }
+    
+    /// Lightning ISP
+    /// - Parameter isp: Index of ISP
+    /// - Returns: A list of nodes hosted by a specified isp, where isp is an ISP's ASN.
+    func lightningISP(isp: Int) async throws -> LightningISP {
+        try await request(for: .isp, method: .get, type: LightningISP.self, extention: "\(isp)")
+    }
+    
+    /// Lightning Node Statistic Per ISP
+    /// - Returns: Aggregate capacity, number of nodes, and number of channels per ISP. Capacity figures are in satoshis.
+    func lightningNodeStatisticPerISP() async throws -> LightningNodeStatisticPerISP {
+        try await request(for: .ispRanking, method: .get, type: LightningNodeStatisticPerISP.self)
+    }
+    
+    /// Lightning Top 100 Nodes
+    /// - Returns: Two lists of the top 100 nodes: one ordered by liquidity (aggregate channel capacity) and the other ordered by connectivity (number of open channels).
+    func lightningTop100Nodes() async throws -> LightningTop100Nodes {
+        try await request(for: .top100Nodes, method: .get, type: LightningTop100Nodes.self)
+    }
+    
+    /// Lightning Top 100 Nodes sorted by Liquidity
+    /// - Returns: A list of the top 100 nodes by liquidity (aggregate channel capacity).
+    func lightningTop100NodesByLiquidity() async throws -> [LightningTop100NodesByLiquidity] {
+        try await request(for: .top100NodesLiquidity, method: .get, type: [LightningTop100NodesByLiquidity].self)
+    }
+    
+    /// Lightning Top 100 Nodes sorted by Connectivity
+    /// - Returns: A list of the top 100 nodes by connectivity (number of open channels).
+    func lightningTop100NodesByConnectivity() async throws -> [LightningTop100NodesByLiquidity] {
+        try await request(for: .top100NodesConnectivity, method: .get, type: [LightningTop100NodesByLiquidity].self)
+    }
+    
+    /// Lightning Top 100 Nodes sorted by Age
+    /// - Returns: A list of the top 100 oldest nodes.
+    func lightningTop100OldestNodes() async throws -> [LightningTop100NodesByLiquidity] {
+        try await request(for: .top100NodesAge, method: .get, type: [LightningTop100NodesByLiquidity].self)
+    }
+    
+    /// Lightning Node Statistics
+    /// - Parameter pubKey: Lightning Node public Key
+    /// - Returns: Details about a node with the given public Key
+    func lightningNodeStatistic(pubKey: String) async throws -> LightningNodeStatistic {
+        try await request(for: .lightningNode, method: .get, type: LightningNodeStatistic.self)
+    }
+    
+    /// Lightning Historical Node Statistics
+    /// - Parameter pubKey: Lightning Node public Key
+    /// - Returns: Historical stats for a node with the given public Key
+    func lightningHistoricalNodeStatistics(pubKey: String) async throws -> LightningHistoricalNodeStatistics {
+        try await request(for: .lightningNode, method: .get, type: LightningHistoricalNodeStatistics.self, extention: "\(pubKey)/statistics")
+    }
+    
+    /// Lightning Channel
+    /// - Parameter channelID: ID of the Lightning Channel
+    /// - Returns: Info about a Lightning channel with the given channelID.
+    func lightningChannel(channelID: String) async throws -> LightningChannel {
+        try await request(for: .lightningChannel, method: .get, type: LightningChannel.self, extention: "statistics")
+    }
+    
+    /// Lightning Channel from Transaction ID
+    /// - Parameter txid: Transaction ID
+    /// - Returns: Channels that correspond to the given transaction ID.
+    func lightningChannelTXID(txid: String) async throws -> ChannelTXID { // Doesnt support multiple txids jet
+        try await request(for: .lightningChannel, method: .get, type: ChannelTXID.self, extention: "txids?txId[]=\(txid)")
+    }
+    
+    /// Lightning Channel From Node Pubkey
+    /// - Parameters:
+    ///   - pubkey: Public Key of the Lightning Node
+    ///   - channelStatus: Status of the Lightning Channels
+    /// - Returns: A list of a node's channels given its public Key.
+    func lightningChannelFromNodePubkey(pubkey: String, channelStatus: MempoolChannelStatus) async throws -> [LightningChannelFromNodePubkey] {
+        try await request(for: .lightningChannel, method: .get, type: [LightningChannelFromNodePubkey].self, extention: "?public_key=\(pubkey)&status=\(channelStatus.rawValue)", extWithSlash: false)
+    }
+    
+    /// Lightning Channel Geodata
+    /// - Returns: A list of channels with corresponding node geodata.
+//    func lightningChannelGeodata() async throws -> [[]] {
+//        try await request(for: .lightningChannelGeoStatus, method: .get, type: [[]].self)
+//    }
 }
-

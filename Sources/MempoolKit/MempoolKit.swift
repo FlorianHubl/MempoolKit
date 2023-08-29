@@ -16,6 +16,7 @@ public enum MempoolError: Error {
     case blockNotFound
     case miningPoolDoesNotExist
     case tooManyHistoryEntries
+    case countryNotFound
     case custom(String)
 }
 
@@ -62,6 +63,19 @@ public struct Mempool {
         case mempoolRecent = "/api/mempool/recent"
         case cpfp = "/api/v1/cpfp"
         case transaction = "/api/tx"
+        case lightning = "/api/v1/lightning/statistics"
+        case channel = "/api/v1/lightning/search?searchText="
+        case country = "/api/v1/lightning/nodes/country"
+        case countries = "/api/v1/lightning/nodes/countries"
+        case isp = "/api/v1/lightning/nodes/isp"
+        case ispRanking = "/api/v1/lightning/nodes/isp-ranking"
+        case top100Nodes = "/api/v1/lightning/nodes/rankings"
+        case top100NodesLiquidity = "/api/v1/lightning/nodes/rankings/liquidity"
+        case top100NodesConnectivity = "/api/v1/lightning/nodes/rankings/connectivity"
+        case top100NodesAge = "/api/v1/lightning/nodes/rankings/age"
+        case lightningNode = "/api/v1/lightning/nodes"
+        case lightningChannel = "/api/v1/lightning/channels"
+        case lightningChannelGeoStatus = "/api/v1/lightning/channels-geo"
     }
 
     enum HTTPMethod: String {
@@ -69,6 +83,12 @@ public struct Mempool {
         case post = "POST"
         case put = "PUT"
         case delete = "DELETE"
+    }
+    
+    public enum MempoolChannelStatus: String {
+        case open
+        case active
+        case closed
     }
     
     let url: String
@@ -90,8 +110,16 @@ public struct Mempool {
         return url
     }
     
-    private func getRequest(for i: Request, method: HTTPMethod, urlExtention: String? = nil, payLoad: String? = nil) -> URLRequest {
-        var request = URLRequest(url: URL(string: "\(url)\(i.rawValue)\(urlExtention != nil ? "/" : "")\(urlExtention ?? "")")!)
+    private func getRequest(for i: Request, method: HTTPMethod, urlExtention: String? = nil, payLoad: String? = nil, extWithSlash: Bool) -> URLRequest {
+        var rqUrl = "\(url)\(i.rawValue)"
+        if let ext = urlExtention {
+            if extWithSlash {
+                rqUrl += "/"
+            }
+            rqUrl += ext
+        }
+        
+        var request = URLRequest(url: URL(string: rqUrl)!)
         request.httpMethod = method.rawValue
         print(request.url!.absoluteString)
         if let payLoad = payLoad {
@@ -101,8 +129,8 @@ public struct Mempool {
         return request
     }
     
-    func request<T: Codable>(for req: Request, method: HTTPMethod, type: T.Type, extention: String? = nil, payLoad: String? = nil) async throws -> T {
-        let a = try await URLSession.shared.data(for: getRequest(for: req, method: method, urlExtention: extention, payLoad: payLoad)).0
+    func request<T: Codable>(for req: Request, method: HTTPMethod, type: T.Type, extention: String? = nil, payLoad: String? = nil, extWithSlash: Bool? = nil) async throws -> T {
+        let a = try await URLSession.shared.data(for: getRequest(for: req, method: method, urlExtention: extention, payLoad: payLoad, extWithSlash: extWithSlash ?? true)).0
         if type is String.Type {
             let b = String(data: a, encoding: .utf8) ?? "unknown error"
             if b.contains("Too Many Requests") {
@@ -118,6 +146,7 @@ public struct Mempool {
             return a as! T
         }else {
             do {
+                print("Decoding...")
                 let a = try JSONDecoder().decode(T.self, from: a)
                 return a
             }catch {
@@ -137,6 +166,8 @@ public struct Mempool {
                         throw MempoolError.miningPoolDoesNotExist
                     }else if error.contains("Too many history entries") {
                         throw MempoolError.tooManyHistoryEntries
+                    }else if error.contains("This country does not exist or does not host any lightning nodes on clearnet") {
+                        throw MempoolError.countryNotFound
                     }
                     throw MempoolError.custom("Unknown Error")
                 }else {

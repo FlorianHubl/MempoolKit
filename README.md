@@ -315,6 +315,14 @@ let mempoolRecent = try await mempool.mempoolRecent()
 
 Returns a list of the last 10 transactions to enter the mempool. Each transaction object contains simplified overview data.
 
+### Mempool Recent
+
+```swift
+let mempoolRecent = try await mempool.mempoolRecent()
+```
+
+Returns a list of the last 10 transactions to enter the mempool. Each transaction object contains simplified overview data.
+
 
 ### Warning
 
