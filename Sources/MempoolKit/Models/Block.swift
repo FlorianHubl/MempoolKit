@@ -19,7 +19,7 @@ public struct Block: Codable, Identifiable, Hashable {
         public let avgFee: Int
         public let avgFeeRate: Int
         public let coinbaseRaw: String
-        public let coinbaseAddress: String
+        public let coinbaseAddress: String?
         public let coinbaseSignature: String
         public let coinbaseSignatureAscii: String
         public let avgTxSize: Double
@@ -27,14 +27,14 @@ public struct Block: Codable, Identifiable, Hashable {
         public let totalOutputs: Int
         public let totalOutputAmt: Int
         public let medianFeeAmt: Int
-        public let feePercentiles: [Int]
+        public let feePercentiles: [Int]?
         public let segwitTotalTxs: Int
         public let segwitTotalSize: Int
         public let segwitTotalWeight: Int
         public let header: String
         public let utxoSetChange: Int
-        public let utxoSetSize: Int
-        public let totalInputAmt: Int
+        public let utxoSetSize: Int?
+        public let totalInputAmt: Int?
         public let virtualSize: Double
         
         // orphans ?

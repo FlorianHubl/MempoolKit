@@ -6,6 +6,12 @@ final class MempoolKitTests: XCTestCase {
     func test() async throws {
 //        try await mainTest()
         let mempool = Mempool()
+        
+        let blockHash = try! await mempool.blocks(blockHeight: 10000)
+        let a = blockHash.map { b in
+            b.height
+        }
+        print(a)
     }
     
     @available(iOS 13.0.0, *)

@@ -129,8 +129,8 @@ public extension Mempool {
     /// Get Blocks
     /// - Parameter blockHeight: The Blocks Hash or ID
     /// - Returns: Details on the past 15 blocks with fee and mining details in extras
-    func blocks(blockHeight: Int) async throws -> String {
-        try await request(for: .blocks, method: .get, type: String.self, extention: "\(blockHeight)")
+    func blocks(blockHeight: Int) async throws -> Blocks {
+        try await request(for: .blocks, method: .get, type: Blocks.self, extention: "\(blockHeight)")
     }
     
     // Disabled

@@ -169,6 +169,7 @@ public struct Mempool {
                     }else if error.contains("This country does not exist or does not host any lightning nodes on clearnet") {
                         throw MempoolError.countryNotFound
                     }
+                    print(error)
                     throw MempoolError.custom("Unknown Error")
                 }else {
                     throw MempoolError.unknownError
