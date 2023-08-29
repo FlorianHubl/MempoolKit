@@ -25,7 +25,7 @@ There will also be Tutorials in the documentation in the future which explane ho
 
 There will be a full DocC tutorial how to build a demo App with MempoolKit in the future.
 
-<img src="https://github.com/FlorianHubl/MempoolKit/blob/main/Tutorial.gif">
+<img src="https://github.com/FlorianHubl/MempoolKit/blob/main/Tutorial.gif", width=100>
 
 # Documentation
 
