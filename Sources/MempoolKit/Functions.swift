@@ -270,7 +270,7 @@ public extension Mempool {
         try await request(for: .transaction, method: .get, type: Transaction.self, extention: txid)
     }
     
-    /// TransactionHex
+    /// Transaction Hex
     /// - Parameter txid: Transaction ID
     /// - Returns: A transaction serialized as hex.
     func transactionHex(txid: String) async throws -> String {
@@ -346,7 +346,7 @@ public extension Mempool {
     }
     
     /// Search Lightning Nodes in a Country
-    /// - Parameter country: country name in two letters ISO Alpha-2 country code
+    /// - Parameter country: country name in ISO Alpha-2 country code
     /// - Returns: A list of Lightning nodes running on clearnet in the requested country.
     func lightningNodesInCountry(country: CountryCode) async throws -> LightningNodesCountry {
         try await request(for: .country, method: .get, type: LightningNodesCountry.self, extention: country.rawValue)
@@ -413,7 +413,7 @@ public extension Mempool {
     /// - Parameter channelID: ID of the Lightning Channel
     /// - Returns: Info about a Lightning channel with the given channelID.
     func lightningChannel(channelID: String) async throws -> LightningChannel {
-        try await request(for: .lightningChannel, method: .get, type: LightningChannel.self, extention: "statistics")
+        try await request(for: .lightningChannel, method: .get, type: LightningChannel.self, extention: channelID)
     }
     
     /// Lightning Channel from Transaction ID

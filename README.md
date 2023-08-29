@@ -21,7 +21,7 @@ A Swift Package that enables to get Bitcoin data through a Mempool instance.
 The Package is fully documented with DocC. Open the documentation window in xCode to read the documentation.
 There will also be Tutorials in the documentation in the future which explane how to use the package with SwiftUI.
 
-## Documentation
+# Documentation
 
 ### Create a Instance
 
@@ -50,6 +50,8 @@ let difficultyAdjustment = try await mempool.difficultyAdjustment()
 ```
 
 Returns details about difficulty adjustment.
+
+## Addresses
 
 ### Address
 
@@ -90,6 +92,8 @@ let utxos = try await mempool.addressUTXOs(address: "1wiz18xYmhRX6xStj2b9t1rwWX4
 ```
 
 Get the list of unspent transaction outputs associated with the address/scripthash.
+
+## Blocks
 
 ### Get Block
 
@@ -178,6 +182,8 @@ let blocks = try await mempool.blocks(blockHash: "0000000000000000000065bda8f8a8
 ```
 
 Returns details on the past 15 blocks with fee and mining details in extras.
+
+## Mining
 
 ### Mining Pools
 
@@ -275,6 +281,8 @@ let blockSizeAndWeights = try await mempool.blockSizeAndWeights(time: .oneYear)
 
 Returns average size (bytes) and average weight (weight units) for blocks in the specified time, ordered oldest to newest.
 
+## Fees
+
 ### Mempool Block Fees
 
 ```swift
@@ -290,6 +298,8 @@ let recommendedFees = try await mempool.recommendedFees()
 ```
 
 Returns the currently suggested fees for new transactions.
+
+## Mempool
 
 ### Mempool
 
@@ -315,14 +325,221 @@ let mempoolRecent = try await mempool.mempoolRecent()
 
 Returns a list of the last 10 transactions to enter the mempool. Each transaction object contains simplified overview data.
 
-### Mempool Recent
+## Transactions
+
+### Children Pay For Parrent
 
 ```swift
-let mempoolRecent = try await mempool.mempoolRecent()
+let cpfp = try await mempool.childrenPayForParrent(txid: "f8325d8f7fa5d658ea143629288d0530d2710dc9193ddc067439de803c37066e")
 ```
 
-Returns a list of the last 10 transactions to enter the mempool. Each transaction object contains simplified overview data.
+Returns the ancestors and the best descendant fees for a transaction.
 
+Note that this transaction is not a cpfp transaction.
+
+### Transaction
+
+```swift
+let tx = try await mempool.transaction(txid: "f8325d8f7fa5d658ea143629288d0530d2710dc9193ddc067439de803c37066e")
+```
+
+Returns details about a transaction
+
+### Transaction Hex
+
+```swift
+let txHex = try await mempool.transactionHex(txid: "f8325d8f7fa5d658ea143629288d0530d2710dc9193ddc067439de803c37066e")
+```
+
+Returns a transaction serialized as hex.
+
+### Transaction Merkle Block Proof
+
+```swift
+let tx = try await mempool.transactionMerkleBlockProof(txid: "f8325d8f7fa5d658ea143629288d0530d2710dc9193ddc067439de803c37066e")
+```
+
+Returns a merkle inclusion proof for the transaction using bitcoind's merkleblock format.
+
+### Transaction Merkle Proof
+
+```swift
+let tx = try await mempool.transactionMerkleProof(txid: "f8325d8f7fa5d658ea143629288d0530d2710dc9193ddc067439de803c37066e")
+```
+
+Returns A merkle inclusion proof for the transaction using Electrum's blockchain.transaction.get_merkle format.
+
+### Transaction Outspend
+
+```swift
+let outspend = try await mempool.transactionOutspend(txid: "f8325d8f7fa5d658ea143629288d0530d2710dc9193ddc067439de803c37066e", vout: 1)
+```
+
+Return the spending status of a transaction output.
+
+### Transaction Outspends
+
+```swift
+let outspends = try await mempool.transactionOutspends(txid: "f8325d8f7fa5d658ea143629288d0530d2710dc9193ddc067439de803c37066e", vout: 1)
+```
+
+Return the spending status of a transaction output.
+
+### Transaction Raw
+
+```swift
+let rawTX = try await mempool.transactionRaw(txid: "f8325d8f7fa5d658ea143629288d0530d2710dc9193ddc067439de803c37066e")
+```
+
+Return the confirmation status of a transaction.
+
+### Transaction Status
+
+```swift
+let txStatus = try await mempool.transactionStatus(txid: "f8325d8f7fa5d658ea143629288d0530d2710dc9193ddc067439de803c37066e")
+```
+
+Return the confirmation status of a transaction.
+
+### Send Transaction
+
+```swift
+try await mempool.sendTransaction(hex: "01000000010000000000000000000000000000000000000000000000000000000000000000ffffffff0704ffff001d013bffffffff0100f2052a010000004341046cc86ddcd0860b7cef16cbaad7fe31fda1bf073c25cb833fa9e409e7f51e296f39b653a9c8040a2f967319ff37cf14b0991b86173462a2d5907cb6c5648b5b76ac00000000")
+```
+
+Broadcast a transaction to the Bitcoin Network. The Transaction is in the hex format.
+
+## Lightning
+
+### Transaction Network Statistic
+
+```swift
+let lnStats = try await mempool.lightningStatistic(time: .oneYear)
+```
+
+Return the network-wide stats such as total number of channels and nodes, total capacity, and average/median fee figures.
+
+### Search Lightning Nodes and Lightning Channels
+
+```swift
+let lnNode = try await mempool.lightningNodes(node: "ACINQ")
+```
+
+Lightning Node aliases, node pubkeys, channel IDs, and short channel IDs. Returns Lightning nodes and channels that match the full-text, case-insensitive.
+
+### Search Lightning Nodes in a Country
+
+```swift
+let lnNode = try await mempool.lightningNodesInCountry(country: .us)
+```
+
+Returns a list of Lightning nodes running on clearnet in the requested country.
+
+### Statistic about Lightning Nodes per country
+
+```swift
+let lnStats = try await mempool.lightningNodesStatisticsPerCountry()
+```
+
+Returns aggregate capacity and number of clearnet nodes per country. Capacity figures are in satoshis.
+
+### Lightning ISP
+
+```swift
+let lnIsp = try await mempool.lightningISP(isp: 16509)
+```
+
+Returns a list of nodes hosted by a specified isp, where isp is an ISP's ASN.
+
+### Lightning Node Statistic Per ISP
+
+```swift
+let lnIsp = try await mempool.lightningNodeStatisticPerISP()
+```
+
+Returns aggregate capacity, number of nodes, and number of channels per ISP. Capacity figures are in satoshis.
+
+### Lightning Top 100 Nodes
+
+```swift
+let top100Nodes = try await mempool.lightningTop100Nodes()
+```
+
+Returns two lists of the top 100 nodes: one ordered by liquidity (aggregate channel capacity) and the other ordered by connectivity (number of open channels).
+
+### Lightning Top 100 Nodes sorted by Liquidity
+
+```swift
+let top100Nodes = try await mempool.lightningTop100NodesByLiquidity()
+```
+
+Returns a list of the top 100 nodes by liquidity (aggregate channel capacity).
+
+### Lightning Top 100 Nodes sorted by Connectivity
+
+```swift
+let top100Nodes = try await mempool.lightningTop100NodesByConnectivity()
+```
+
+Returns a list of the top 100 nodes by connectivity (number of open channels).
+
+### Lightning Top 100 Nodes sorted by Age
+
+```swift
+let top100Nodes = try await mempool.lightningTop100OldestNodes()
+```
+
+Returns a list of the top 100 oldest nodes.
+
+### Lightning Node Statistics
+
+```swift
+let node = try await mempool.lightningNodeStatistic(pubKey: "03864ef025fde8fb587d989186ce6a4a186895ee44a926bfc370e2c366597a3f8f")
+```
+
+Returns Details about a node with the given public Key.
+
+### Lightning Historical Node Statistics
+
+```swift
+let node = try await mempool.lightningHistoricalNodeStatistics(pubKey: "03864ef025fde8fb587d989186ce6a4a186895ee44a926bfc370e2c366597a3f8f")
+```
+
+Returns Historical stats for a node with the given public Key.
+
+### Lightning Channel
+
+```swift
+let channel = try await mempool.lightningChannel(channelID: "855515703977115663")
+```
+
+Returns Info about a Lightning channel with the given channelID.
+
+### Lightning Channel from Transaction ID
+
+```swift
+let channel = try await mempool.lightningChannelTXID(txid: "f95aea73705256e0d31ca722bda3e350f411590cd2e5222fb3be23912834495a")
+```
+
+Returns Channels that correspond to the given transaction ID.
+
+### Lightning Channel From Node Pubkey
+
+```swift
+let channel = try await mempool.lightningChannelFromNodePubkey(pubkey: "855515703977115663", channelStatus: .open)
+```
+
+Returns a list of a node's channels given its public Key.
+
+### Missing Methods:
+
+Blocks Bulk:
+
+This API Method is disabled by mempool.space.
+
+Lightning Channel Geodata:
+
+Its return JSON does not conform to a swift type.
 
 ### Warning
 
