@@ -1,55 +1,55 @@
 import Foundation
 
-public struct Block: Codable {
-    let id: String
-    let height, version, timestamp, tx_count: Int
-    let size, weight: Int
-    let merkle_root: String
-    let previousblockhash: String? // nil at genisis block
-    let mediantime, nonce, bits: Int
-    let difficulty: Double
-    let extras: Extras?
+public struct Block: Codable, Identifiable {
+    public let id: String
+    public let height, version, timestamp, tx_count: Int
+    public let size, weight: Int
+    public let merkle_root: String
+    public let previousblockhash: String? // nil at genisis block
+    public let mediantime, nonce, bits: Int
+    public let difficulty: Double
+    public let extras: Extras?
     
-    struct Extras: Codable {
-        let totalFees: Int
-        let medianFee: Int
-        let feeRange: [Double]?
-        let reward: Int
-        let pool: Pool
-        let avgFee: Int
-        let avgFeeRate: Int
-        let coinbaseRaw: String
-        let coinbaseAddress: String
-        let coinbaseSignature: String
-        let coinbaseSignatureAscii: String
-        let avgTxSize: Double
-        let totalInputs: Int
-        let totalOutputs: Int
-        let totalOutputAmt: Int
-        let medianFeeAmt: Int
-        let feePercentiles: [Int]
-        let segwitTotalTxs: Int
-        let segwitTotalSize: Int
-        let segwitTotalWeight: Int
-        let header: String
-        let utxoSetChange: Int
-        let utxoSetSize: Int
-        let totalInputAmt: Int
-        let virtualSize: Double
+    public struct Extras: Codable {
+        public let totalFees: Int
+        public let medianFee: Int
+        public let feeRange: [Double]?
+        public let reward: Int
+        public let pool: Pool
+        public let avgFee: Int
+        public let avgFeeRate: Int
+        public let coinbaseRaw: String
+        public let coinbaseAddress: String
+        public let coinbaseSignature: String
+        public let coinbaseSignatureAscii: String
+        public let avgTxSize: Double
+        public let totalInputs: Int
+        public let totalOutputs: Int
+        public let totalOutputAmt: Int
+        public let medianFeeAmt: Int
+        public let feePercentiles: [Int]
+        public let segwitTotalTxs: Int
+        public let segwitTotalSize: Int
+        public let segwitTotalWeight: Int
+        public let header: String
+        public let utxoSetChange: Int
+        public let utxoSetSize: Int
+        public let totalInputAmt: Int
+        public let virtualSize: Double
         
         // orphans ?
         
         // matchRate ? can be nil
         
-        let expectedFees: Int?
-        let expectedWeight: Int?
+        public let expectedFees: Int?
+        public let expectedWeight: Int?
         
     }
     
-    struct Pool: Codable {
-        let id: Int
-        let name: String
-        let slug: String
+    public struct Pool: Codable {
+        public let id: Int
+        public let name: String
+        public let slug: String
     }
 }
 

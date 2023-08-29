@@ -1,7 +1,21 @@
+
+import SwiftUI
 import MempoolKit
 
-let mempool = Mempool()
-
-Task {
-    let latestBlockHeight = try await mempool.blockTipHeight()
+struct ContentView: View {
+    
+    let mempool = Mempool()
+    
+    var body: some View {
+        Form {
+            
+        }
+    }
 }
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+    }
+}
+

@@ -6,9 +6,6 @@ final class MempoolKitTests: XCTestCase {
     func test() async throws {
 //        try await mainTest()
         let mempool = Mempool()
-        
-        let a = try await mempool.lightningChannelGeodata()
-        print(a)
     }
     
     @available(iOS 13.0.0, *)
