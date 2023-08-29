@@ -15,6 +15,7 @@ public enum MempoolError: Error {
     case invalidnumber
     case blockNotFound
     case miningPoolDoesNotExist
+    case tooManyHistoryEntries
     case custom(String)
 }
 
@@ -59,6 +60,8 @@ public struct Mempool {
         case mempool = "/api/mempool"
         case mempoolTXIDs = "/api/mempool/txids"
         case mempoolRecent = "/api/mempool/recent"
+        case cpfp = "/api/v1/cpfp"
+        case transaction = "/api/tx"
     }
 
     enum HTTPMethod: String {
@@ -98,14 +101,16 @@ public struct Mempool {
         return request
     }
     
-    func request<T: Codable>(for req: Request, method: HTTPMethod, type: T.Type, extention: String? = nil) async throws -> T {
-        let a = try await URLSession.shared.data(for: getRequest(for: req, method: method, urlExtention: extention)).0
+    func request<T: Codable>(for req: Request, method: HTTPMethod, type: T.Type, extention: String? = nil, payLoad: String? = nil) async throws -> T {
+        let a = try await URLSession.shared.data(for: getRequest(for: req, method: method, urlExtention: extention, payLoad: payLoad)).0
         if type is String.Type {
-            let b = String(data: a, encoding: .utf8) ?? "Error"
+            let b = String(data: a, encoding: .utf8) ?? "unknown error"
             if b.contains("Too Many Requests") {
                 throw MempoolError.tooManyRequests
             }else if b.contains("Block not found") {
                 throw MempoolError.blockNotFound
+            }else if b.contains("error") {
+                throw MempoolError.custom(b)
             }else {
                 return b as! T
             }
@@ -130,6 +135,8 @@ public struct Mempool {
                         throw MempoolError.blockNotFound
                     }else if error.contains("This mining pool does not exist") {
                         throw MempoolError.miningPoolDoesNotExist
+                    }else if error.contains("Too many history entries") {
+                        throw MempoolError.tooManyHistoryEntries
                     }
                     throw MempoolError.custom("Unknown Error")
                 }else {

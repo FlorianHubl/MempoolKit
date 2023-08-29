@@ -254,15 +254,77 @@ public extension Mempool {
         try await request(for: .mempoolRecent, method: .get, type: MempoolRecents.self)
     }
     
+    /// Children Pay For Parrent
+    /// - Parameter txid: Transaction ID
+    /// - Returns: The ancestors and the best descendant fees for a transaction.
+    func childrenPayForParrent(txid: String) async throws -> CPFP {
+        try await request(for: .cpfp, method: .get, type: CPFP.self, extention: txid)
+    }
+    
+    /// Transaction
+    /// - Parameter txid: Transaction ID
+    /// - Returns: Details about a transaction
+    func transaction(txid: String) async throws -> Transaction {
+        try await request(for: .transaction, method: .get, type: Transaction.self, extention: txid)
+    }
+    
+    /// TransactionHex
+    /// - Parameter txid: Transaction ID
+    /// - Returns: A transaction serialized as hex.
+    func transactionHex(txid: String) async throws -> String {
+        try await request(for: .transaction, method: .get, type: String.self, extention: "\(txid)/hex")
+    }
+    
+    /// Transaction Merkle Block Proof
+    /// - Parameter txid: Transaction ID
+    /// - Returns: A merkle inclusion proof for the transaction using bitcoind's merkleblock format.
+    func transactionMerkleBlockProof(txid: String) async throws -> String {
+        try await request(for: .transaction, method: .get, type: String.self, extention: "\(txid)/merkleblock-proof")
+    }
+    
+    /// Transaction Merkle Proof
+    /// - Parameter txid: Transaction ID
+    /// - Returns: A merkle inclusion proof for the transaction using Electrum's blockchain.transaction.get_merkle format.
+    func transactionMerkleProof(txid: String) async throws -> MercleProof {
+        try await request(for: .transaction, method: .get, type: MercleProof.self, extention: "\(txid)/merkle-proof")
+    }
+    
+    /// Transaction Outspend
+    /// - Parameters:
+    ///   - txid: Transaction ID
+    ///   - vout: The index of the vout.
+    /// - Returns: The spending status of a transaction output.
+    func transactionOutspend(txid: String, vout: Int) async throws -> TransactionOutspend {
+        try await request(for: .transaction, method: .get, type: TransactionOutspend.self, extention: "\(txid)/outspend/\(vout)")
+    }
+    
+    /// Transaction Outspends
+    /// - Parameter txid: Transaction ID
+    /// - Returns: The spending status of all transaction outputs.
+    func transactionOutspends(txid: String) async throws -> TransactionOutspends {
+        try await request(for: .transaction, method: .get, type: TransactionOutspends.self, extention: "\(txid)/outspends")
+    }
+    
+    /// Transaction Raw
+    /// - Parameter txid: Transaction ID
+    /// - Returns: A transaction as Data.
+    func transactionRaw(txid: String) async throws -> Data {
+        try await request(for: .transaction, method: .get, type: Data.self, extention: "\(txid)/raw")
+    }
+    
+    /// Transaction Status
+    /// - Parameter txid: Transaction ID
+    /// - Returns: The confirmation status of a transaction.
+    func transactionStatus(txid: String) async throws -> TransactionStatus {
+        try await request(for: .transaction, method: .get, type: TransactionStatus.self, extention: "\(txid)/status")
+    }
+    
+    /// Send Transaction
+    /// Broadcast a raw Transaction to the Bitcoin network.
+    /// - Parameter hex: The raw Hex of the Transaction.
+    /// - Returns: Transaction ID will be returned on success.
+    func sendTransaction(hex: String) async throws -> String {
+        try await request(for: .transaction, method: .post, type: String.self, payLoad: hex)
+    }
 }
-
-
-
-
-
-
-
-
-
-
 

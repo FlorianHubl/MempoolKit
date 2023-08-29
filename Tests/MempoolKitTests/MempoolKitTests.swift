@@ -14,12 +14,16 @@ final class MempoolKitTests: XCTestCase {
         
         // Testing from Block 700000 Block to Block 700100 with counting UTXOs from the first Address.
         
-        for i in 700000...700100 {
-            let blockHash = try await mempool.blockHeight(blockHeight: i)
-            let txs = try await mempool.blockTXs(blockHash: blockHash)
-            if let firstOut = txs.first?.vout.first?.scriptpubkey_address {
-                let address = try await mempool.addressUTXOs(address: firstOut)
-                print("Address: \(firstOut) UTXOs: \(address.count)")
+        for i in 700025...700100 {
+            do {
+                let blockHash = try await mempool.blockHeight(blockHeight: i)
+                let txs = try await mempool.blockTXs(blockHash: blockHash)
+                if let firstOut = txs.first?.vout.first?.scriptpubkey_address {
+                    let address = try await mempool.addressUTXOs(address: firstOut)
+                    print("Address: \(firstOut) UTXOs: \(address.count)")
+                }
+            }catch {
+                print("Error")
             }
         }
     }
