@@ -12,11 +12,10 @@ struct ContentView: View {
         NavigationStack {
             Form {
                 ForEach(blocks) { block in
-                    Button("\(block.height)") {
-                        
-                    }
+                    NavigationLink("\(block.height)", value: block)
                 }
             }
+            .navigationTitle("MempoolKit Tutorial")
         }
     }
 }

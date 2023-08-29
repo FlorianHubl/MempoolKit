@@ -7,10 +7,11 @@ struct ContentView: View {
     let mempool = Mempool()
     
     var body: some View {
-        NavigationStack {
+        NavigationStack {
             Form {
                 
             }
+            .navigationTitle("MempoolKit Tutorial")
         }
     }
 }

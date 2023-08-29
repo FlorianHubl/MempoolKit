@@ -6,8 +6,6 @@
     
     @Section(title: "New Project") {
         @ContentAndMedia {
-            First create a new iOS App
-            @Image(source: , alt: "")
         }
         
         @Steps {
