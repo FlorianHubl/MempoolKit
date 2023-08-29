@@ -12,7 +12,7 @@ public struct Block: Codable, Identifiable, Hashable {
     
     public struct Extras: Codable, Hashable {
         public let totalFees: Int
-        public let medianFee: Int
+        public let medianFee: Double
         public let feeRange: [Double]?
         public let reward: Int
         public let pool: Pool
@@ -26,7 +26,7 @@ public struct Block: Codable, Identifiable, Hashable {
         public let totalInputs: Int
         public let totalOutputs: Int
         public let totalOutputAmt: Int
-        public let medianFeeAmt: Int
+        public let medianFeeAmt: Int?
         public let feePercentiles: [Int]?
         public let segwitTotalTxs: Int
         public let segwitTotalSize: Int
