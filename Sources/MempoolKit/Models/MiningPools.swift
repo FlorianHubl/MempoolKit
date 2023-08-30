@@ -12,8 +12,8 @@ public struct MiningPools: Codable {
         let link: String
         let blockCount, rank, emptyBlocks: Int
         let slug: String
-        let avgMatchRate: Double
-        let avgFeeDelta: String
+        let avgMatchRate: Double?
+        let avgFeeDelta: String?
         let poolUniqueId: Int
     }
 }

@@ -9,7 +9,8 @@ public struct Node: Codable {
     let public_key: String
     let capacity, channels: Int
     let alias: String
-    let first_seen, updated_at: Int
+    let first_seen: Int
+    let updated_at: Int?
     let city: Country?
     let country: Country?
     let iso_code: String

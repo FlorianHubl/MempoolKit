@@ -444,7 +444,7 @@ Returns the currently suggested fees for new transactions.
 ### Mempool
 
 ```swift
-let mempool = try await mempool.mempool()
+let mempoolStatistics = try await mempool.mempool()
 ```
 
 Returns the current mempool backlog statistics.

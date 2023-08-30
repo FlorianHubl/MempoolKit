@@ -342,11 +342,11 @@ public extension Mempool {
     /// - Parameter node: Lightning Node aliases, node pubkeys, channel IDs, and short channel IDs.
     /// - Returns: Lightning nodes and channels that match the full-text, case-insensitive.
     func lightningNodes(node: String) async throws -> LightningNodes {
-        try await request(for: .channel, method: .get, type: LightningNodes.self, extention: node)
+        try await request(for: .channel, method: .get, type: LightningNodes.self, extention: node, extWithSlash: false)
     }
     
     /// Search Lightning Nodes in a Country
-    /// - Parameter country: country name in ISO Alpha-2 country code
+    /// - Parameter country: country name in ISO Alpha-2 country code. Not every country is supported.
     /// - Returns: A list of Lightning nodes running on clearnet in the requested country.
     func lightningNodesInCountry(country: CountryCode) async throws -> LightningNodesCountry {
         try await request(for: .country, method: .get, type: LightningNodesCountry.self, extention: country.rawValue)
@@ -354,8 +354,8 @@ public extension Mempool {
     
     /// Statistic about Lightning Nodes per country
     /// - Returns: Aggregate capacity and number of clearnet nodes per country. Capacity figures are in satoshis.
-    func lightningNodesStatisticsPerCountry() async throws -> LightningNodesCountry {
-        try await request(for: .countries, method: .get, type: LightningNodesCountry.self)
+    func lightningNodesStatisticsPerCountry() async throws -> LightningNodesCountries {
+        try await request(for: .countries, method: .get, type: LightningNodesCountries.self)
     }
     
     /// Lightning ISP
@@ -399,7 +399,7 @@ public extension Mempool {
     /// - Parameter pubKey: Lightning Node public Key
     /// - Returns: Details about a node with the given public Key
     func lightningNodeStatistic(pubKey: String) async throws -> LightningNodeStatistic {
-        try await request(for: .lightningNode, method: .get, type: LightningNodeStatistic.self)
+        try await request(for: .lightningNode, method: .get, type: LightningNodeStatistic.self, extention: pubKey)
     }
     
     /// Lightning Historical Node Statistics
@@ -419,8 +419,8 @@ public extension Mempool {
     /// Lightning Channel from Transaction ID
     /// - Parameter txid: Transaction ID
     /// - Returns: Channels that correspond to the given transaction ID.
-    func lightningChannelTXID(txid: String) async throws -> ChannelTXID { // Doesnt support multiple txids jet
-        try await request(for: .lightningChannel, method: .get, type: ChannelTXID.self, extention: "txids?txId[]=\(txid)")
+    func lightningChannelTXID(txid: String) async throws -> ChannelTXIDs { // Doesnt support multiple txids jet
+        try await request(for: .lightningChannel, method: .get, type: ChannelTXIDs.self, extention: "txids?txId[]=\(txid)")
     }
     
     /// Lightning Channel From Node Pubkey

@@ -116,14 +116,13 @@ public struct Mempool {
             if extWithSlash {
                 rqUrl += "/"
             }
-            rqUrl += ext
+            rqUrl += ext.removingWhitespaces().withoutEmoji()
         }
-        
+        #if DEBUG
+            print(rqUrl)
+        #endif
         var request = URLRequest(url: URL(string: rqUrl)!)
         request.httpMethod = method.rawValue
-        #if DEBUG
-        print(request.url!.absoluteString)
-        #endif
         if let payLoad = payLoad {
             request = addPayload(payload: payLoad, request)
         }
@@ -190,5 +189,14 @@ public struct Mempool {
         case oneYear = "1y"
         case twoYears = "2y"
         case threeYears = "3y"
+    }
+}
+
+extension String {
+    func withoutEmoji() -> String {
+        filter { $0.isASCII }
+    }
+    func removingWhitespaces() -> String {
+        components(separatedBy: .whitespaces).joined()
     }
 }
