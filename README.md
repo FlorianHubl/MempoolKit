@@ -302,7 +302,7 @@ Returns the hash of the last block.
 ### Block Transaction ID
 
 ```swift
-let blockTXID = try await mempool.blockTXID(blockHash: "0000000000000000000065bda8f8a88f2e1e00d9a6887a43d640e52a4c7660f2", index: 1)
+let blockTXID = try await mempool.blockTXID(blockHash: "0000000000000000000065bda8f8a88f2e1e00d9a6887a43d640e52a4c7660f2")
 ```
 
 Returns the transaction at index within the specified block.
@@ -318,7 +318,7 @@ Returns a list of all txids in the block.
 ### Block Transaction
 
 ```swift
-let blockTXIDs = try await mempool.blockTXs(blockHash: "0000000000000000000065bda8f8a88f2e1e00d9a6887a43d640e52a4c7660f2")
+let blockTXs = try await mempool.blockTXs(blockHash: "0000000000000000000065bda8f8a88f2e1e00d9a6887a43d640e52a4c7660f2")
 ```
 
 Returns a list of 25 transactions in the block.
@@ -504,7 +504,7 @@ Returns a transaction serialized as hex.
 ### Transaction Merkle Block Proof
 
 ```swift
-let tx = try await mempool.transactionMerkleBlockProof(txid: "f8325d8f7fa5d658ea143629288d0530d2710dc9193ddc067439de803c37066e")
+let merkleBlockProof = try await mempool.transactionMerkleBlockProof(txid: "f8325d8f7fa5d658ea143629288d0530d2710dc9193ddc067439de803c37066e")
 ```
 
 Returns a merkle inclusion proof for the transaction using bitcoind's merkleblock format.
@@ -512,7 +512,7 @@ Returns a merkle inclusion proof for the transaction using bitcoind's merklebloc
 ### Transaction Merkle Proof
 
 ```swift
-let tx = try await mempool.transactionMerkleProof(txid: "f8325d8f7fa5d658ea143629288d0530d2710dc9193ddc067439de803c37066e")
+let merkleProof = try await mempool.transactionMerkleProof(txid: "f8325d8f7fa5d658ea143629288d0530d2710dc9193ddc067439de803c37066e")
 ```
 
 Returns A merkle inclusion proof for the transaction using Electrum's blockchain.transaction.get_merkle format.
@@ -528,7 +528,7 @@ Return the spending status of a transaction output.
 ### Transaction Outspends
 
 ```swift
-let outspends = try await mempool.transactionOutspends(txid: "f8325d8f7fa5d658ea143629288d0530d2710dc9193ddc067439de803c37066e", vout: 1)
+let outspends = try await mempool.transactionOutspends(txid: "f8325d8f7fa5d658ea143629288d0530d2710dc9193ddc067439de803c37066e")
 ```
 
 Return the spending status of a transaction output.

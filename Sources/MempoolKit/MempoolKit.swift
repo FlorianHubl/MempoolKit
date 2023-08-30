@@ -121,7 +121,9 @@ public struct Mempool {
         
         var request = URLRequest(url: URL(string: rqUrl)!)
         request.httpMethod = method.rawValue
+        #if DEBUG
         print(request.url!.absoluteString)
+        #endif
         if let payLoad = payLoad {
             request = addPayload(payload: payLoad, request)
         }
@@ -146,7 +148,6 @@ public struct Mempool {
             return a as! T
         }else {
             do {
-                print("Decoding...")
                 let a = try JSONDecoder().decode(T.self, from: a)
                 return a
             }catch {
@@ -168,9 +169,10 @@ public struct Mempool {
                         throw MempoolError.tooManyHistoryEntries
                     }else if error.contains("This country does not exist or does not host any lightning nodes on clearnet") {
                         throw MempoolError.countryNotFound
+                    }else {
+                        print(error)
+                        throw MempoolError.custom("Unknown Error")
                     }
-                    print(error)
-                    throw MempoolError.custom("Unknown Error")
                 }else {
                     throw MempoolError.unknownError
                 }
