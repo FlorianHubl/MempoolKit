@@ -81,11 +81,11 @@ ForEach(blocks) { block in
 Now we write the refresh function which load the last 15 blocks. First we find out what the current block height is with mempool.blockTipHeight(). Than we load the last 15 blocks with mempool.blocks(blockHeight: currentBlockHeight). Now we set blocks equal to newBlocks to load the blocks in the UI.
 
 ```swift
-    func refresh() async {
-        let currentBlockHeight = try! await mempool.blockTipHeight()
-        let newBlocks = try! await mempool.blocks(blockHeight: currentBlockHeight)
-        blocks = newBlocks
-    }
+func refresh() async {
+    let currentBlockHeight = try! await mempool.blockTipHeight()
+    let newBlocks = try! await mempool.blocks(blockHeight: currentBlockHeight)
+    blocks = newBlocks
+}
 ```
 
 Add the task and refreshable modifiyer to execute the refresh function when the View gets loaded or the user wants to refresh the View.
