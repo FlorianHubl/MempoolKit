@@ -4,7 +4,7 @@
         @Image(source: Wallpaper.gif, alt: "Wallpaper")
     }
     
-    @Chapter(name: "First Steps") {
+    @Chapter(name: "MempoolKit App Tutorial") {
         @Image(source: Blocks.png, alt: "Blocks")
         In this tutorial we gonna create a demo Mempool App in which loads the current blocks. We build an interactive User Interface with SwiftUI and use MempoolKit as the connection with the Bitcoin Network.
         @TutorialReference(tutorial: "doc:Mempool App")

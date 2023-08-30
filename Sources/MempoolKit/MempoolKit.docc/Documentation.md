@@ -9,6 +9,12 @@ You can connect your own instance of mempool or use mempool.space.
 
 ![](Wallpaper.gif)
 
+## Tutorial
+
+Write a Demo Mempool App with this tutorial:
+
+<doc:MempolKit>
+
 ### Get started
 
 To get started create an Instance of Mempool.
@@ -35,14 +41,13 @@ let latestBlockHeight = try await mempool.blockTipHeight()
 To get the hash of this block use the blockHeight method.
 
 ```swift
-let latestBlockHash = try await mempool.blockHeight(latestBlockHeight)
+let latestBlockHash = try await mempool.blockHeight(blockHeight: latestBlockHeight)
 ```
 
 Lets get a few information from this block using the block method.
 
 ```swift
-let block = try await mempool.block(latestBlockHash)
+let block = try await mempool.block(blockHash: latestBlockHash)
 ```
 
 To see every method please read to the ``MempoolKit`` page.
-

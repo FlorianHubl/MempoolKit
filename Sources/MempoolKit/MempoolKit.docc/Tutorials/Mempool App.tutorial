@@ -1,22 +1,106 @@
-@Tutorial(time: 30) {
+@Tutorial(time: 21) {
     @Intro(title: "Creating a Demo Mempool iOS App") {
         In this tutorial we gonna create a demo Mempool App in which loads the current blocks. We build an interactive User Interface with SwiftUI and use MempoolKit as the connection with the Bitcoin Network.        
         @Image(source: Wallpaper.png, alt: "Wallpaper")
     }
     
-    @Section(title: "New Project") {
+    @Section(title: "Create a new Project") {
         @ContentAndMedia {
         }
         
         @Steps {
             @Step {
                 First create a new iOS App
-                @Image(source: , alt: "")
+                @Image(source: pic1.png, alt: "Picture 1")
+                }
             
             @Step {
-                Choose SwiftUI as the User Interface.
-                @Code(name: "", file: )
+                Choose SwiftUI as the User Interface and give your project a name.
+                @Image(source: pic2.png, alt: "Picture 2")
             }
+        }
+    }
+    
+    @Section(title: "Import MempoolKit") {
+        @ContentAndMedia {
+            @Image(source: Animation.gif, alt: "Animation")
+        }
+        
+        @Steps {
+            @Step {
+                Click on "File --> Add Packages…"
+                @Image(source: pic3.png, alt: "Picture 3")
+            }
+            @Step {
+                Now the Package window is open.
+                @Image(source: pic4.png, alt: "Picture 4")
+            }
+            @Step {
+                Paste "https://github.com/FlorianHubl/MempoolKit" in the Search Field.
+                @Image(source: pic5.png, alt: "Picture 5")
+            }
+            @Step {
+                Click on "Add Package"
+                @Image(source: pic6.png, alt: "Picture 6")
+            }
+            @Step {
+                MempoolKit is imported in your project.
+                @Image(source: pic7.png, alt: "Picture 7")
+            }
+        }
+    }
+    @Section(title: "Write SwiftUI Code") {
+        @ContentAndMedia {
+            @Image(source: Blocks.png, alt: "Block")
+        }
+        
+        @Steps {
+            @Step {
+                Now we write the Code
+                @Code(file: 1.swift, name: "1") {
+                    @Image(source: 1.png, alt: "Picture 1")
+                }
+            }
+        @Step {
+            Import MempoolKit
+            @Code(file: 2.swift, name: "2") {
+                @Image(source: 2.png, alt: "Picture 2")
+            }
+        }
+        @Step {
+            Remove the basic code and replace them with a Form within a NavigationStack. Give the Form a navigationTitle. Make a instance of Mempool.
+            @Code(file: 3.swift, name: "3") {
+                @Image(source: 3.png, alt: "Picture 3")
+            }
+        }
+        @Step {
+            Write a State propery with the name "blocks" and set is equal to a empty Array of blocks.
+            Write a ForEach Loop over the block within the Form. In the ForEach write a NavigationLink.
+            @Code(file: 4.swift, name: "4") {
+                @Image(source: 4.png, alt: "Picture 4")
+            }
+        }
+        @Step {
+            Now we write the refresh function which load the last 15 blocks. First we find out what the current block height is with mempool.blockTipHeight(). Than we load the last 15 blocks with mempool.blocks(blockHeight: currentBlockHeight). Now we set blocks equal to newBlocks to load the blocks in the UI.
+            @Code(file: 5.swift, name: "5") {
+                @Image(source: 5.png, alt: "Picture 5")
+            }
+        }
+        @Step {
+            Add the task and refreshable modifiyer to execute the refresh function when the View gets loaded or the user wants to refresh the View.
+            @Code(file: 6.swift, name: "6") {
+                @Image(source: 6.png, alt: "Picture 6")
+            }
+        }
+        @Step {
+            Now write a navigationDestination for a detailed View of a Block. Write it for Block.self. Write a Form with LabeledContent for the Hash, the Difficulty, the Nonce and the amount of Transactions.
+            @Code(file: 7.swift, name: "7") {
+                @Image(source: 7.png, alt: "Picture 7")
+            }
+        }
+        @Step {
+            We are done and wrote a App with the MempoolKit Package.
+            @Image(source: Tutorial.gif, alt: "Tutorial Video")
         }
     }
 }
