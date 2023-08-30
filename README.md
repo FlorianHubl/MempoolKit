@@ -50,17 +50,17 @@ import MempoolKit
 Make a instance of Mempool.
 
 ```swift
-    let mempool = Mempool()
+let mempool = Mempool()
 ```
 
 Remove the basic code and replace them with a Form within a NavigationStack. Give the Form a navigationTitle.
     
 ```swift
-    NavigationStack {
-        Form {
+NavigationStack {
+    Form {
                 
-        }
-        .navigationTitle("MempoolKit Tutorial")
+    }
+    .navigationTitle("MempoolKit Tutorial")
 }
 ```
 
