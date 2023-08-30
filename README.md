@@ -694,3 +694,6 @@ Its return JSON does not conform to a swift type.
 Please also note that this package is still in the early stages of development and is therefore still very buggy.
 
 Also please report bugs to improve the package.
+
+
+
