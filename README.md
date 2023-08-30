@@ -336,7 +336,7 @@ Returns details on the past 15 blocks with fee and mining details in extras.
 ### Mining Pools
 
 ```swift
-let miningPools = try await mempool.miningPools(time. .oneYear)
+let miningPools = try await mempool.miningPools(time: .oneYear)
 ```
 
 Returns a list of all known mining pools ordered by blocks found over the specified time.
@@ -365,14 +365,6 @@ let miningPoolHashrate = try await mempool.miningPoolHashrate(miningPool: "AntPo
 
 Returns all known hashrate data for the mining pool specified by the name. Hashrate values are weekly averages.
 
-### Mining Pool Hashrate
-
-```swift
-let miningPoolHashrate = try await mempool.miningPoolHashrate(miningPool: "AntPool")
-```
-
-Returns all known hashrate data for the mining pool specified by the name. Hashrate values are weekly averages.
-
 ### Mining Pool Blocks
 
 ```swift
@@ -392,7 +384,7 @@ Returns Network-wide hashrate and difficulty figures over the specified time.
 ### Mining Reward Statistic
 
 ```swift
-let miningRewardStats = try await mempool.miningRewardStats(blockcount: 100)
+let miningRewardStats = try await mempool.miningRewardStats(blockCount: 100)
 ```
 
 Returns Block reward and total transactions confirmed for the past specified blocks.
@@ -694,6 +686,14 @@ Its return JSON does not conform to a swift type.
 Please also note that this package is still in the early stages of development and is therefore still very buggy.
 
 Also please report bugs to improve the package.
+
+
+
+
+
+
+
+
 
 
 
