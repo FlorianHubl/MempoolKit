@@ -27,113 +27,54 @@ There is a full DocC tutorial how to build a demo App with MempoolKit. To do thi
 
 ## MempoolKit App Tutorial
 
-### Section 1: Create a new Project
+- First create a new iOS App
 
-First create a new iOS App
+- Choose SwiftUI as the User Interface and give your project a name.
 
-<img src="https://github.com/FlorianHubl/MempoolKit/blob/main/Sources/MempoolKit/MempoolKit.docc/Resources/pic1.png" width="300">
+- Click on “File –> Add Packages…”
 
-Choose SwiftUI as the User Interface and give your project a name.
+- Paste “https://github.com/FlorianHubl/MempoolKit” in the Search Field.
 
-<img src="https://github.com/FlorianHubl/MempoolKit/blob/main/Sources/MempoolKit/MempoolKit.docc/Resources/pic2.png" width="300">
+- Click on “Add Package”
 
-### Section2: Import MempoolKit
-
-<img src="https://github.com/FlorianHubl/MempoolKit/blob/main/Sources/MempoolKit/MempoolKit.docc/Resources/Animation.gif" width="300">
-
-Click on “File –> Add Packages…”
-
-<img src="https://github.com/FlorianHubl/MempoolKit/blob/main/Sources/MempoolKit/MempoolKit.docc/Resources/pic3.png" width="300">
-
-Now the Package window is open.
-
-<img src="https://github.com/FlorianHubl/MempoolKit/blob/main/Sources/MempoolKit/MempoolKit.docc/Resources/pic4.png" width="300">
-
-Paste “https://github.com/FlorianHubl/MempoolKit” in the Search Field.
-
-<img src="https://github.com/FlorianHubl/MempoolKit/blob/main/Sources/MempoolKit/MempoolKit.docc/Resources/pic5.png" width="300">
-
-Click on “Add Package”
-
-<img src="https://github.com/FlorianHubl/MempoolKit/blob/main/Sources/MempoolKit/MempoolKit.docc/Resources/pic6.png" width="300">
-
-MempoolKit is imported in your project.
-
-<img src="https://github.com/FlorianHubl/MempoolKit/blob/main/Sources/MempoolKit/MempoolKit.docc/Resources/pic7.png" width="300">
-
-### Section 3: Write SwiftUI Code
+- MempoolKit is imported in your project.
 
 Now we write the Code.
 
-```swift
-
-import SwiftUI
-
-struct ContentView: View {
-    
-    var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
-        }
-        .padding()
-    }
-}
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-    }
-}
-
-
-```
-
-Import MempoolKit
+First import the MempoolKit Package in your project.
 
 ```swift
 import MempoolKit
 ```
 
-Remove the basic code and replace them with a Form within a NavigationStack. Give the Form a navigationTitle. Make a instance of Mempool.
+Make a instance of Mempool.
 
 ```swift
-struct ContentView: View {
-    
     let mempool = Mempool()
+```
+
+Remove the basic code and replace them with a Form within a NavigationStack. Give the Form a navigationTitle.
     
-    var body: some View {
-        NavigationStack {
-            Form {
+```swift
+    NavigationStack {
+        Form {
                 
-            }
-            .navigationTitle("MempoolKit Tutorial")
         }
-    }
+        .navigationTitle("MempoolKit Tutorial")
 }
 ```
 
-Write a State propery with the name “blocks” and set is equal to a empty Array of blocks. Write a ForEach Loop over the block within the Form. In the ForEach write a NavigationLink.
+Write a State propery with the name “blocks” and set is equal to a empty Array of blocks.
 
 ```swift
-struct ContentView: View {
-    
-    let mempool = Mempool()
-    
-    @State private var blocks = Blocks()
-    
-    var body: some View {
-        NavigationStack {
-            Form {
-                ForEach(blocks) { block in
-                    NavigationLink("\(block.height)", value: block)
-                }
-            }
-            .navigationTitle("MempoolKit Tutorial")
-        }
-    }
+@State private var blocks = Blocks()
+```
+
+Write a ForEach Loop over the block within the Form. In the ForEach write a NavigationLink.
+
+```swift
+ForEach(blocks) { block in
+    NavigationLink("\(block.height)", value: block)
 }
 ```
 
@@ -223,6 +164,8 @@ struct ContentView_Previews: PreviewProvider {
     }
 }
 ```
+
+Run the App.
 
 <img src="https://github.com/FlorianHubl/MempoolKit/blob/main/Tutorial.gif" width="173">
 
