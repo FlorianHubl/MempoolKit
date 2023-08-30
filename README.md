@@ -31,35 +31,35 @@ There is a full DocC tutorial how to build a demo App with MempoolKit. To do thi
 
 First create a new iOS App
 
-<img src="https://github.com/FlorianHubl/MempoolKit/blob/main/Sources/MempoolKit/MempoolKit.docc/Resources/pic1.png" width="173">
+<img src="https://github.com/FlorianHubl/MempoolKit/blob/main/Sources/MempoolKit/MempoolKit.docc/Resources/pic1.png" width="300">
 
 Choose SwiftUI as the User Interface and give your project a name.
 
-<img src="https://github.com/FlorianHubl/MempoolKit/blob/main/Sources/MempoolKit/MempoolKit.docc/Resources/pic2.png" width="173">
+<img src="https://github.com/FlorianHubl/MempoolKit/blob/main/Sources/MempoolKit/MempoolKit.docc/Resources/pic2.png" width="300">
 
 ### Section2: Import MempoolKit
 
-<img src="https://github.com/FlorianHubl/MempoolKit/blob/main/Sources/MempoolKit/MempoolKit.docc/Resources/Animation.gif" width="173">
+<img src="https://github.com/FlorianHubl/MempoolKit/blob/main/Sources/MempoolKit/MempoolKit.docc/Resources/Animation.gif" width="300">
 
 Click on “File –> Add Packages…”
 
-<img src="https://github.com/FlorianHubl/MempoolKit/blob/main/Sources/MempoolKit/MempoolKit.docc/Resources/pic3.png" width="173">
+<img src="https://github.com/FlorianHubl/MempoolKit/blob/main/Sources/MempoolKit/MempoolKit.docc/Resources/pic3.png" width="300">
 
 Now the Package window is open.
 
-<img src="https://github.com/FlorianHubl/MempoolKit/blob/main/Sources/MempoolKit/MempoolKit.docc/Resources/pic4.png" width="173">
+<img src="https://github.com/FlorianHubl/MempoolKit/blob/main/Sources/MempoolKit/MempoolKit.docc/Resources/pic4.png" width="300">
 
 Paste “https://github.com/FlorianHubl/MempoolKit” in the Search Field.
 
-<img src="https://github.com/FlorianHubl/MempoolKit/blob/main/Sources/MempoolKit/MempoolKit.docc/Resources/pic5.png" width="173">
+<img src="https://github.com/FlorianHubl/MempoolKit/blob/main/Sources/MempoolKit/MempoolKit.docc/Resources/pic5.png" width="300">
 
 Click on “Add Package”
 
-<img src="https://github.com/FlorianHubl/MempoolKit/blob/main/Sources/MempoolKit/MempoolKit.docc/Resources/pic6.png" width="173">
+<img src="https://github.com/FlorianHubl/MempoolKit/blob/main/Sources/MempoolKit/MempoolKit.docc/Resources/pic6.png" width="300">
 
 MempoolKit is imported in your project.
 
-<img src="https://github.com/FlorianHubl/MempoolKit/blob/main/Sources/MempoolKit/MempoolKit.docc/Resources/pic7.png" width="173">
+<img src="https://github.com/FlorianHubl/MempoolKit/blob/main/Sources/MempoolKit/MempoolKit.docc/Resources/pic7.png" width="300">
 
 ### Section 3: Write SwiftUI Code
 
