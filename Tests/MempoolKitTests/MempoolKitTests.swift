@@ -18,7 +18,7 @@ final class MempoolKitTests: XCTestCase {
         let blockTipHash = try await mempool.blockTipHash()
         let blockTipHeight = try await mempool.blockTipHeight()
         let randomBlock = Int.random(in: 0...blockTipHeight)
-        for i in (randomBlock-100)...randomBlock {
+        for i in (324776)...324786 {
             try await Task.sleep(nanoseconds: 3_000_000)
             let blockHash = try await mempool.blockHeight(blockHeight: i)
             let block = try await mempool.block(blockHash: blockHash)
@@ -30,7 +30,6 @@ final class MempoolKitTests: XCTestCase {
             let blockTXs = try await mempool.blockTXs(blockHash: blockHash)
             let blockTXIDs = try await mempool.blockTXIDs(blockHash: blockHash)
             for tx in blockTXIDs {
-                try await Task.sleep(nanoseconds: 7_000_000)
                 try await testTransaction(txid: tx)
             }
         }
@@ -40,11 +39,17 @@ final class MempoolKitTests: XCTestCase {
     func testTransaction(txid: String) async throws {
         let mempool = Mempool()
         let tx = try await mempool.transaction(txid: txid)
+        try await Task.sleep(nanoseconds: 1_000_000)
         let txHex = try await mempool.transactionHex(txid: txid)
+        try await Task.sleep(nanoseconds: 1_000_000)
         let merkleBlockProof = try await mempool.transactionMerkleBlockProof(txid: txid)
+        try await Task.sleep(nanoseconds: 1_000_000)
         let merkleProof = try await mempool.transactionMerkleProof(txid: txid)
+        try await Task.sleep(nanoseconds: 1_000_000)
         let outspends = try await mempool.transactionOutspends(txid: txid)
+        try await Task.sleep(nanoseconds: 1_000_000)
         let rawTX = try await mempool.transactionRaw(txid: txid)
+        try await Task.sleep(nanoseconds: 1_000_000)
         let txStatus = try await mempool.transactionStatus(txid: txid)
     }
 }

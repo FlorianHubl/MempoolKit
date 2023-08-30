@@ -41,6 +41,7 @@ public struct Transaction: Codable {
         case v0_p2wsh
         case v1_p2tr
         case op_return
+        case multisig
     }
 }
 
