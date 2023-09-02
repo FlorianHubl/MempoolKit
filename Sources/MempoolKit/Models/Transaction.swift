@@ -9,6 +9,8 @@ public struct Transaction: Codable {
     public let size, weight, fee: Int
     public let status: Status
     
+    public static let demo = Transaction(txid: "txid", version: 1, locktime: 1, vin: [Vin(txid: "txid", vout: 1, prevout: Vout(scriptpubkey: "scriptpubkey", scriptpubkey_asm: "scriptpubkey_asm", scriptpubkey_type: .p2pkh, scriptpubkey_address: "scriptpubkey_address", value: 1), scriptsig: "scriptsig", scriptsig_asm: "scriptsig_asm", witness: ["witness", "witness", "witness"], is_coinbase: false, sequence: 1, inner_redeemscript_asm: "inner_redeemscript_asm", inner_witnessscript_asm: "inner_witnessscript_asm")], vout: [Vout(scriptpubkey: "scriptpubkey", scriptpubkey_asm: "scriptpubkey_asm", scriptpubkey_type: .p2pkh, scriptpubkey_address: "scriptpubkey_address", value: 1)], size: 1, weight: 1, fee: 1, status: .init(confirmed: true, block_height: 21, block_hash: "block_hash", block_time: 21))
+    
     public struct Status: Codable {
         public let confirmed: Bool
         public let block_height: Int?
