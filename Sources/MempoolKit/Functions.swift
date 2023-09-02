@@ -3,13 +3,12 @@
 
 import SwiftUI
 
-@available(iOS 13.0.0, *)
+@available(iOS 13.0.0, macOS 12.0.0,  *)
 public extension Mempool {
     
     // General
     
     /// Information about the difficulty adjustment such as previousRetarget, progressPercent and many more.
-    ///
     /// - Returns: All Details about the difficulty adjustment: progressPercent, difficultyChange, estimatedRetargetDate, remainingBlocks, remainingTime, previousRetarget, nextRetargetHeight, timeAvg, timeOffset
     func difficultyAdjustment() async throws -> DifficultyAdjustment {
         try await request(for: .difficultyAdjustment, method: .get, type: DifficultyAdjustment.self)

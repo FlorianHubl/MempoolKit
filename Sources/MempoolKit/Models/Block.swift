@@ -10,6 +10,8 @@ public struct Block: Codable, Identifiable, Hashable {
     public let difficulty: Double
     public let extras: Extras?
     
+    public static let demo = Block(id: "BlockID", height: 21000, version: 1, timestamp: 1, tx_count: 21, size: 1, weight: 1, merkle_root: "merkle_root", previousblockhash: "previousblockhash", mediantime: 1, nonce: 21, bits: 21, difficulty: 21, extras: .demo)
+    
     public struct Extras: Codable, Hashable {
         public let totalFees: Int
         public let medianFee: Double
@@ -43,6 +45,8 @@ public struct Block: Codable, Identifiable, Hashable {
         
         public let expectedFees: Int?
         public let expectedWeight: Int?
+        
+        public static let demo = Extras(totalFees: 21, medianFee: 21, feeRange: [1, 2, 3], reward: 21, pool: .init(id: 1, name: "Pool", slug: "Pool"), avgFee: 21, avgFeeRate: 21, coinbaseRaw: "coinbaseRaw", coinbaseAddress: "coinbaseAddress", coinbaseSignature: "coinbaseSignature", coinbaseSignatureAscii: "coinbaseSignatureAscii", avgTxSize: 21, totalInputs: 21, totalOutputs: 21, totalOutputAmt: 21, medianFeeAmt: 21, feePercentiles: [1, 2, 3], segwitTotalTxs: 21, segwitTotalSize: 21, segwitTotalWeight: 21, header: "header", utxoSetChange: 21, utxoSetSize: 21, totalInputAmt: 21, virtualSize: 21, expectedFees: 21, expectedWeight: 21)
         
     }
     
