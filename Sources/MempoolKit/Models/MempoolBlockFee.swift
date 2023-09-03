@@ -1,11 +1,11 @@
 import Foundation
 
 public struct MempoolBlockFee: Codable {
-    let blockSize: Int
-    let blockVSize: Double
-    let nTx, totalFees: Int
-    let medianFee: Double
-    let feeRange: [Double]
+    public let blockSize: Int
+    public let blockVSize: Double
+    public let nTx, totalFees: Int
+    public let medianFee: Double
+    public let feeRange: [Double]
 }
 
 public typealias MempoolBlockFees = [MempoolBlockFee]
