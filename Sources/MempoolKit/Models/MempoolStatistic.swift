@@ -2,7 +2,7 @@
 import Foundation
 
 public struct MempoolStatistic: Codable {
-    let count, vsize, total_fee: Int
-    let fee_histogram: [[Double]]
+    public let count, vsize, total_fee: Int
+    public let fee_histogram: [[Double]]
 }
 
