@@ -92,15 +92,20 @@ public struct Mempool {
     }
     
     let url: String
+    let debugMode: Bool
 
     /// The initialiser for the official mempool.space api.
-    public init() {
+    /// - Parameter debugMode: prints debug information if true
+    public init(debugMode: Bool? = nil) {
         self.url = "https://mempool.space"
+        self.debugMode = debugMode ?? false
     }
     
     /// The initialiser for a self hosted instance of mempool.
-    public init(server: String) {
+    /// - Parameter debugMode: prints debug information if true
+    public init(server: String, debugMode: Bool? = nil) {
         self.url = server
+        self.debugMode = debugMode ?? false
     }
     
     private func addPayload(payload: String, _ urlr: URLRequest) -> URLRequest {
@@ -118,9 +123,9 @@ public struct Mempool {
             }
             rqUrl += ext.removingWhitespaces().withoutEmoji()
         }
-        #if DEBUG
-            print(rqUrl)
-        #endif
+        if debugMode {
+            print("MempoolKit: \(rqUrl)")
+        }
         var request = URLRequest(url: URL(string: rqUrl)!)
         request.httpMethod = method.rawValue
         if let payLoad = payLoad {
