@@ -2,8 +2,8 @@
 import Foundation
 
 public struct MercleProof: Codable {
-    let block_height: Int
-    let merkle: [String]
-    let pos: Int
+    public let block_height: Int
+    public let merkle: [String]
+    public let pos: Int
 }
 

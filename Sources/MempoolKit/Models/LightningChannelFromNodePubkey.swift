@@ -2,17 +2,17 @@
 import Foundation
 
 public struct LightningChannelFromNodePubkey: Codable {
-    let status: Int
-    //    let closingReason, closingDate: ?
-    let capacity: Int
-    let shortID, id: String
-    let feeRate: Int
-    let node: Node
+    public let status: Int
+    //    public let closingReason, closingDate: ?
+    public let capacity: Int
+    public let shortID, id: String
+    public let feeRate: Int
+    public let node: Node
     
-    struct Node: Codable {
-        let alias, publicKey: String
-        let channels: Int
-        let capacity: String
+    public struct Node: Codable {
+        public let alias, publicKey: String
+        public let channels: Int
+        public let capacity: String
     }
 }
 

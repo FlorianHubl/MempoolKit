@@ -2,18 +2,18 @@
 import Foundation
 
 public struct Hashrate: Codable {
-    let hashrates: [Hashrate]
-    let difficulty: [Difficulty]
-    let currentHashrate, currentDifficulty: Double
+    public let hashrates: [Hashrate]
+    public let difficulty: [Difficulty]
+    public let currentHashrate, currentDifficulty: Double
     
-    struct Difficulty: Codable {
-        let time, height: Int
-        let difficulty, adjustment: Double
+    public struct Difficulty: Codable {
+        public let time, height: Int
+        public let difficulty, adjustment: Double
     }
     
-    struct Hashrate: Codable {
-        let timestamp: Int
-        let avgHashrate: Double
+    public struct Hashrate: Codable {
+        public let timestamp: Int
+        public let avgHashrate: Double
     }
 }
 

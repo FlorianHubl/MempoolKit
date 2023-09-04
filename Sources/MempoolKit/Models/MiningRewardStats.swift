@@ -1,6 +1,6 @@
 import Foundation
 
 public struct MiningRewardStats: Codable {
-    let startBlock, endBlock: Int
-    let totalReward, totalFee, totalTx: String
+    public let startBlock, endBlock: Int
+    public let totalReward, totalFee, totalTx: String
 }

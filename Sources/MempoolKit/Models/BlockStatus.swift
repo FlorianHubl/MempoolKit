@@ -2,9 +2,9 @@
 import Foundation
 
 public struct BlockStatus: Codable {
-    let in_best_chain: Bool
-    let height: Int
-    let next_best: String
+    public let in_best_chain: Bool
+    public let height: Int
+    public let next_best: String
 }
 
 

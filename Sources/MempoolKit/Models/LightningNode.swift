@@ -2,18 +2,18 @@
 import Foundation
 
 public struct LightningNodes: Codable {
-    let nodes: [Node]
-    let channels: [Channel]
+    public let nodes: [Node]
+    public let channels: [Channel]
     
-    struct Channel: Codable {
-        let id, short_id: String
-        let capacity, status: Int
+    public struct Channel: Codable {
+        public let id, short_id: String
+        public let capacity, status: Int
     }
     
-    struct Node: Codable {
-        let public_key, alias: String
-        let capacity, channels: Int?
-        let status: Int
+    public struct Node: Codable {
+        public let public_key, alias: String
+        public let capacity, channels: Int?
+        public let status: Int
     }
 }
 

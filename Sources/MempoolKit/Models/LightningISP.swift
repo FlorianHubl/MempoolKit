@@ -2,7 +2,7 @@
 import Foundation
 
 public struct LightningISP: Codable {
-    let isp: String
-    let nodes: [Node]
+    public let isp: String
+    public let nodes: [Node]
 }
 

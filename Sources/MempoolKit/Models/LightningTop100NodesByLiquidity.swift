@@ -2,9 +2,9 @@
 import Foundation
 
 public struct LightningTop100NodesByLiquidity: Codable {
-    let publicKey, alias: String
-    let capacity, channels, firstSeen, updatedAt: Int
-    let city, country: Country?
-    let iso_code, subdivision: String?
+    public let publicKey, alias: String
+    public let capacity, channels, firstSeen, updatedAt: Int
+    public let city, country: Country?
+    public let iso_code, subdivision: String?
 }
 

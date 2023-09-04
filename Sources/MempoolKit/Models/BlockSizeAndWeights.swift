@@ -2,15 +2,15 @@
 import Foundation
 
 public struct BlockSizeAndWeights: Codable {
-    let sizes: [Size]
-    let weights: [Weight]
+    public let sizes: [Size]
+    public let weights: [Weight]
     
-    struct Size: Codable {
-        let avgHeight, timestamp, avgSize: Int
+    public struct Size: Codable {
+        public let avgHeight, timestamp, avgSize: Int
     }
     
-    struct Weight: Codable {
-        let avgHeight, timestamp, avgWeight: Int
+    public struct Weight: Codable {
+        public let avgHeight, timestamp, avgWeight: Int
     }
 }
 

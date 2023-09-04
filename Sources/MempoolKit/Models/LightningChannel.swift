@@ -2,28 +2,28 @@
 import Foundation
 
 public struct LightningChannel: Codable {
-    let id, short_id: String
-    let capacity: Int
-    let transaction_id: String
-    let transaction_vout: Int
-    let closing_transaction_id: String?
-    let closing_fee: Int
-    let closing_reason: String?
-    let closing_date: String?
-    let updated_at, created: String
-    let status: Int
+    public let id, short_id: String
+    public let capacity: Int
+    public let transaction_id: String
+    public let transaction_vout: Int
+    public let closing_transaction_id: String?
+    public let closing_fee: Int
+    public let closing_reason: String?
+    public let closing_date: String?
+    public let updated_at, created: String
+    public let status: Int
 //  fundingRatio, closedBy
-    let singleFunded: Bool?
-    let node_left, node_right: Node
+    public let singleFunded: Bool?
+    public let node_left, node_right: Node
     
-    struct Node: Codable {
-        let alias: String
-        let public_key: String
-        let channels, capacity, base_fee_mtokens, cltv_delta: Int
-        let fee_rate, is_disabled, max_htlc_mtokens, min_htlc_mtokens: Int
-        let updated_at: String
-        let longitude, latitude: Double
-        let funding_balance, closing_balance: Int
+    public struct Node: Codable {
+        public let alias: String
+        public let public_key: String
+        public let channels, capacity, base_fee_mtokens, cltv_delta: Int
+        public let fee_rate, is_disabled, max_htlc_mtokens, min_htlc_mtokens: Int
+        public let updated_at: String
+        public let longitude, latitude: Double
+        public let funding_balance, closing_balance: Int
     }
 }
 

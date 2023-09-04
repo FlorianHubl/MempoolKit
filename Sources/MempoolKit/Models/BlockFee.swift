@@ -2,8 +2,8 @@
 import Foundation
 
 public struct BlockFee: Codable {
-    let avgHeight, timestamp, avgFees: Int
-    let USD: Double
+    public let avgHeight, timestamp, avgFees: Int
+    public let USD: Double
 }
 
 public typealias BlockFees = [BlockFee]

@@ -2,29 +2,29 @@
 import Foundation
 
 public struct LightningNodesCountry: Codable {
-    let country: Country
-    let nodes: [Node]
+    public let country: Country
+    public let nodes: [Node]
 }
 public struct Node: Codable {
-    let public_key: String
-    let capacity, channels: Int
-    let alias: String
-    let first_seen: Int
-    let updated_at: Int?
-    let city: Country?
-    let country: Country?
-    let iso_code: String
-    let subdivision: Country?
-    let longitude, latitude: Double
-    let as_number: Int?
-    let isp: String?
+    public let public_key: String
+    public let capacity, channels: Int
+    public let alias: String
+    public let first_seen: Int
+    public let updated_at: Int?
+    public let city: Country?
+    public let country: Country?
+    public let iso_code: String
+    public let subdivision: Country?
+    public let longitude, latitude: Double
+    public let as_number: Int?
+    public let isp: String?
 }
 
 public struct Country: Codable {
-    let de: String?
-    let en: String?
-    //        let es, fr, ja, ptBR: String?
-    //        let ru, zhCN: String?
+    public let de: String?
+    public let en: String?
+    //        public let es, fr, ja, ptBR: String?
+    //        public let ru, zhCN: String?
     //        enum CodingKeys: String, CodingKey {
     //            case de, en, es, fr, ja
     //            case ptBR = "pt-BR"

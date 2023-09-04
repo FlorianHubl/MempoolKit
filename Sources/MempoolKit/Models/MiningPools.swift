@@ -2,19 +2,19 @@ import Foundation
 
 /// Information about the Bitcoin Mining Pools
 public struct MiningPools: Codable {
-    let pools: [Pool]
-    let blockCount: Int
-    let lastEstimatedHashrate: Double
+    public let pools: [Pool]
+    public let blockCount: Int
+    public let lastEstimatedHashrate: Double
     
-    struct Pool: Codable {
-        let poolId: Int
-        let name: String
-        let link: String
-        let blockCount, rank, emptyBlocks: Int
-        let slug: String
-        let avgMatchRate: Double?
-        let avgFeeDelta: String?
-        let poolUniqueId: Int
+    public struct Pool: Codable {
+        public let poolId: Int
+        public let name: String
+        public let link: String
+        public let blockCount, rank, emptyBlocks: Int
+        public let slug: String
+        public let avgMatchRate: Double?
+        public let avgFeeDelta: String?
+        public let poolUniqueId: Int
     }
 }
 
