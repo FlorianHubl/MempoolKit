@@ -123,6 +123,26 @@ final class MempoolKitTests: XCTestCase {
         _ = try await mempool.lightningChannelTXID(txid: "f95aea73705256e0d31ca722bda3e350f411590cd2e5222fb3be23912834495a")
         _ = try await mempool.lightningChannelFromNodePubkey(pubkey: "855515703977115663", channelStatus: .open)
     }
+    
+    @available(iOS 13.0.0, *)
+    func testCustomServer() async throws {
+        
+        // Public Mempool Server
+        // https://mempool.space
+        // http://xtrum.com
+        // https://bitcoin.lu.ke
+        
+        
+        let a = Mempool(server: "http://xtrum.com", debugMode: true)
+        var index = 0
+        while index < 1000 {
+            let blocks = try await a.blocks(blockHeight: index)
+            print(blocks.map({ i in
+                i.id
+            }))
+            index += 15
+        }
+    }
 }
 
 
