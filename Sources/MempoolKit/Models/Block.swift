@@ -12,6 +12,8 @@ public struct Block: Codable, Identifiable, Hashable {
     
     public static let demo = Block(id: "BlockID", height: 21000, version: 1, timestamp: 1, tx_count: 21, size: 1, weight: 1, merkle_root: "merkle_root", previousblockhash: "previousblockhash", mediantime: 1, nonce: 21, bits: 21, difficulty: 21, extras: .demo)
     
+    public static let demoGenisis = Block(id: "BlockID", height: 0, version: 1, timestamp: 1, tx_count: 21, size: 1, weight: 1, merkle_root: "merkle_root", previousblockhash: "previousblockhash", mediantime: 1, nonce: 21, bits: 21, difficulty: 21, extras: .demo)
+    
     public struct Extras: Codable, Hashable {
         public let totalFees: Int
         public let medianFee: Double
