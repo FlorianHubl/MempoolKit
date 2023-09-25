@@ -143,6 +143,13 @@ final class MempoolKitTests: XCTestCase {
             index += 15
         }
     }
+    
+    @available(iOS 13.0.0, *)
+    func testTorServer() async throws {
+        let mempool = Mempool(server: "http://mempoolhqx4isw62xs7abwphsq7ldayuidyx2v2oethdhhj6mlo2r6ad.onion", debugMode: true)
+        let fees = try await mempool.recommendedFees()
+        print(fees)
+    }
 }
 
 

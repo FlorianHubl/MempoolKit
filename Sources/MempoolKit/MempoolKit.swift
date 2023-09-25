@@ -1,5 +1,23 @@
 import Foundation
 import Network
+import SwiftTor
+
+@available(iOS 13.0, *)
+struct ClearnetReq: RequestTyp {
+    func request(request: URLRequest) async throws -> (Data, URLResponse) {
+        return try await URLSession.shared.data(for: request)
+    }
+}
+
+@available(iOS 13.0, *)
+extension SwiftTor: RequestTyp {
+    
+}
+
+@available(iOS 13.0, *)
+protocol RequestTyp {
+    func request(request: URLRequest) async throws -> (Data, URLResponse)
+}
 
 extension Data {
     func print() {
@@ -34,6 +52,7 @@ public enum MempoolError: Error {
 /// ```swift
 /// let mempool = Mempool(server: "https://mymempoolserver.local")
 /// ```
+/// 
 
 @available(iOS 13.0.0, macOS 12.0.0,  *)
 public struct Mempool {
@@ -93,19 +112,22 @@ public struct Mempool {
     
     let url: String
     let debugMode: Bool
+    let requestType: RequestTyp
 
     /// The initialiser for the official mempool.space api.
     /// - Parameter debugMode: prints debug information if true
     public init(debugMode: Bool? = nil) {
         self.url = "https://mempool.space"
         self.debugMode = debugMode ?? false
+        self.requestType = ClearnetReq()
     }
     
     /// The initialiser for a self hosted instance of mempool.
     /// - Parameter debugMode: prints debug information if true
-    public init(server: String, debugMode: Bool? = nil) {
+    public init(server: String, debugMode: Bool? = nil, tor: SwiftTor? = nil) {
         self.url = server
         self.debugMode = debugMode ?? false
+        self.requestType = server.suffix(6) == ".onion" ? tor ?? SwiftTor() : ClearnetReq()
     }
     
     private func addPayload(payload: String, _ urlr: URLRequest) -> URLRequest {
@@ -136,7 +158,7 @@ public struct Mempool {
     }
     
     func request<T: Codable>(for req: Request, method: HTTPMethod, type: T.Type, extention: String? = nil, payLoad: String? = nil, extWithSlash: Bool? = nil) async throws -> T {
-        let a = try await URLSession.shared.data(for: getRequest(for: req, method: method, urlExtention: extention, payLoad: payLoad, extWithSlash: extWithSlash ?? true)).0
+        let a = try await requestType.request(request: getRequest(for: req, method: method, urlExtention: extention, payLoad: payLoad, extWithSlash: extWithSlash ?? true)).0
         if type is String.Type {
             let b = String(data: a, encoding: .utf8) ?? "unknown error"
             if b.contains("Too Many Requests") {
