@@ -21,154 +21,6 @@ A Swift Package that enables to get Bitcoin data through a Mempool instance.
 The Package is fully documented with DocC. Open the documentation window in xCode to read the documentation.
 There will also be Tutorials in the documentation in the future which explane how to use the package with SwiftUI.
 
-# Tutorial
-
-There is a full DocC tutorial how to build a demo App with MempoolKit. To do this tutorial add the package to your project and open the documentation window. Click on MempoolKit and open the Meet MempoolKit Article or open the MempoolKit App Tutorial.
-
-## MempoolKit App Tutorial
-
-- First create a new iOS App
-
-- Choose SwiftUI as the User Interface and give your project a name.
-
-- Click on “File –> Add Packages…”
-
-- Paste “https://github.com/FlorianHubl/MempoolKit” in the Search Field.
-
-- Click on “Add Package”
-
-- MempoolKit is imported in your project.
-
-Now we write the Code.
-
-First import the MempoolKit Package in your project.
-
-```swift
-import MempoolKit
-```
-
-Make a instance of Mempool.
-
-```swift
-let mempool = Mempool()
-```
-
-Remove the basic code and replace them with a Form within a NavigationStack. Give the Form a navigationTitle.
-    
-```swift
-NavigationStack {
-    Form {
-                
-    }
-    .navigationTitle("MempoolKit Tutorial")
-}
-```
-
-Write a State propery with the name “blocks” and set is equal to a empty Array of blocks.
-
-```swift
-@State private var blocks = Blocks()
-```
-
-Write a ForEach Loop over the block within the Form. In the ForEach write a NavigationLink.
-
-```swift
-ForEach(blocks) { block in
-    NavigationLink("\(block.height)", value: block)
-}
-```
-
-Now we write the refresh function which load the last 15 blocks. First we find out what the current block height is with mempool.blockTipHeight(). Than we load the last 15 blocks with mempool.blocks(blockHeight: currentBlockHeight). Now we set blocks equal to newBlocks to load the blocks in the UI.
-
-```swift
-func refresh() async {
-    let currentBlockHeight = try! await mempool.blockTipHeight()
-    let newBlocks = try! await mempool.blocks(blockHeight: currentBlockHeight)
-    blocks = newBlocks
-}
-```
-
-Add the task and refreshable modifiyer to execute the refresh function when the View gets loaded or the user wants to refresh the View.
-
-```swift
-.task {
-    await refresh()
-}
-.refreshable {
-    await refresh()
-}
-```
-
-Now write a navigationDestination for a detailed View of a Block. Write it for Block.self. Write a Form with LabeledContent for the Hash, the Difficulty, the Nonce and the amount of Transactions.
-
-```swift
-.navigationDestination(for: Block.self) { block in
-    Form {
-        LabeledContent("Hash", value: block.id)
-        LabeledContent("Difficulty", value: "\(block.difficulty)")
-        LabeledContent("Nonce", value: "\(block.nonce)")
-        LabeledContent("Transactions", value: "\(block.tx_count)")
-    }
-    .navigationTitle("Block \(block.height)")
-}
-```
-
-We are done and wrote a App with the MempoolKit Package.
-
-```swift
-import SwiftUI
-import MempoolKit
-
-struct ContentView: View {
-    
-    let mempool = Mempool()
-    
-    @State private var blocks = Blocks()
-    
-    var body: some View {
-        NavigationStack {
-            Form {
-                ForEach(blocks) { block in
-                    NavigationLink("\(block.height)", value: block)
-                }
-            }
-            .navigationTitle("MempoolKit Tutorial")
-            .navigationDestination(for: Block.self) { block in
-                Form {
-                    LabeledContent("Hash", value: block.id)
-                    LabeledContent("Difficulty", value: "\(block.difficulty)")
-                    LabeledContent("Nonce", value: "\(block.nonce)")
-                    LabeledContent("Transactions", value: "\(block.tx_count)")
-                }
-                .navigationTitle("Block \(block.height)")
-            }
-            .task {
-                await refresh()
-            }
-            .refreshable {
-                await refresh()
-            }
-        }
-    }
-    
-    func refresh() async {
-        let currentBlockHeight = try! await mempool.blockTipHeight()
-        let newBlocks = try! await mempool.blocks(blockHeight: currentBlockHeight)
-        blocks = newBlocks
-    }
-}
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-    }
-}
-```
-
-Run the App.
-
-<img src="https://github.com/FlorianHubl/MempoolKit/blob/main/Tutorial.gif" width="173">
-
 # Documentation
 
 ### Create a Instance
@@ -186,6 +38,15 @@ You can also connect it to your own instance of mempool.
 ```swift
 let mempool = Mempool(server: "https://yourmempoolinstance.local")
 ```
+
+### Connecting to Testnet
+
+You can connect to the testnet via the mempool space server.
+
+```swift
+let mempool = Mempool(network: .testnet)
+```
+
 
 ### Warning
 
@@ -680,6 +541,154 @@ This API Method is disabled by mempool.space.
 Lightning Channel Geodata:
 
 Its return JSON does not conform to a swift type.
+
+# Tutorial
+
+There is a full DocC tutorial how to build a demo App with MempoolKit. To do this tutorial add the package to your project and open the documentation window. Click on MempoolKit and open the Meet MempoolKit Article or open the MempoolKit App Tutorial.
+
+## MempoolKit App Tutorial
+
+- First create a new iOS App
+
+- Choose SwiftUI as the User Interface and give your project a name.
+
+- Click on “File –> Add Packages…”
+
+- Paste “https://github.com/FlorianHubl/MempoolKit” in the Search Field.
+
+- Click on “Add Package”
+
+- MempoolKit is imported in your project.
+
+Now we write the Code.
+
+First import the MempoolKit Package in your project.
+
+```swift
+import MempoolKit
+```
+
+Make a instance of Mempool.
+
+```swift
+let mempool = Mempool()
+```
+
+Remove the basic code and replace them with a Form within a NavigationStack. Give the Form a navigationTitle.
+    
+```swift
+NavigationStack {
+    Form {
+                
+    }
+    .navigationTitle("MempoolKit Tutorial")
+}
+```
+
+Write a State propery with the name “blocks” and set is equal to a empty Array of blocks.
+
+```swift
+@State private var blocks = Blocks()
+```
+
+Write a ForEach Loop over the block within the Form. In the ForEach write a NavigationLink.
+
+```swift
+ForEach(blocks) { block in
+    NavigationLink("\(block.height)", value: block)
+}
+```
+
+Now we write the refresh function which load the last 15 blocks. First we find out what the current block height is with mempool.blockTipHeight(). Than we load the last 15 blocks with mempool.blocks(blockHeight: currentBlockHeight). Now we set blocks equal to newBlocks to load the blocks in the UI.
+
+```swift
+func refresh() async {
+    let currentBlockHeight = try! await mempool.blockTipHeight()
+    let newBlocks = try! await mempool.blocks(blockHeight: currentBlockHeight)
+    blocks = newBlocks
+}
+```
+
+Add the task and refreshable modifiyer to execute the refresh function when the View gets loaded or the user wants to refresh the View.
+
+```swift
+.task {
+    await refresh()
+}
+.refreshable {
+    await refresh()
+}
+```
+
+Now write a navigationDestination for a detailed View of a Block. Write it for Block.self. Write a Form with LabeledContent for the Hash, the Difficulty, the Nonce and the amount of Transactions.
+
+```swift
+.navigationDestination(for: Block.self) { block in
+    Form {
+        LabeledContent("Hash", value: block.id)
+        LabeledContent("Difficulty", value: "\(block.difficulty)")
+        LabeledContent("Nonce", value: "\(block.nonce)")
+        LabeledContent("Transactions", value: "\(block.tx_count)")
+    }
+    .navigationTitle("Block \(block.height)")
+}
+```
+
+We are done and wrote a App with the MempoolKit Package.
+
+```swift
+import SwiftUI
+import MempoolKit
+
+struct ContentView: View {
+    
+    let mempool = Mempool()
+    
+    @State private var blocks = Blocks()
+    
+    var body: some View {
+        NavigationStack {
+            Form {
+                ForEach(blocks) { block in
+                    NavigationLink("\(block.height)", value: block)
+                }
+            }
+            .navigationTitle("MempoolKit Tutorial")
+            .navigationDestination(for: Block.self) { block in
+                Form {
+                    LabeledContent("Hash", value: block.id)
+                    LabeledContent("Difficulty", value: "\(block.difficulty)")
+                    LabeledContent("Nonce", value: "\(block.nonce)")
+                    LabeledContent("Transactions", value: "\(block.tx_count)")
+                }
+                .navigationTitle("Block \(block.height)")
+            }
+            .task {
+                await refresh()
+            }
+            .refreshable {
+                await refresh()
+            }
+        }
+    }
+    
+    func refresh() async {
+        let currentBlockHeight = try! await mempool.blockTipHeight()
+        let newBlocks = try! await mempool.blocks(blockHeight: currentBlockHeight)
+        blocks = newBlocks
+    }
+}
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+    }
+}
+```
+
+Run the App.
+
+<img src="https://github.com/FlorianHubl/MempoolKit/blob/main/Tutorial.gif" width="173">
 
 ### Warning
 

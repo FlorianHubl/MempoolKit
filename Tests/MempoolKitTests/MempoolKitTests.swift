@@ -143,8 +143,14 @@ final class MempoolKitTests: XCTestCase {
             index += 15
         }
     }
+    
+    @available(iOS 13.0.0, *)
+    func testNetTest() async throws {
+        let mempool = Mempool(network: .testnet, debugMode: true)
+        let fees = try await mempool.addressTXS(address: "mgWFkrrMys8XCcZRzP21sHc7xQU7nkcc1H")
+        print(fees)
+    }
 }
-
 
 
 

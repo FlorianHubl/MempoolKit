@@ -116,8 +116,8 @@ public struct Mempool {
 
     /// The initialiser for the official mempool.space api.
     /// - Parameter debugMode: prints debug information if true
-    public init(debugMode: Bool? = nil) {
-        self.url = "https://mempool.space"
+    public init(network: BitcoinNetwork? = nil, debugMode: Bool? = nil) {
+        self.url = "https://mempool.space\(network ?? .mainnet == .mainnet ? "" : "/testnet")"
         self.debugMode = debugMode ?? false
         self.requestType = ClearnetReq()
     }
@@ -128,6 +128,11 @@ public struct Mempool {
         self.url = server
         self.debugMode = debugMode ?? false
         self.requestType = server.suffix(6) == ".onion" ? tor ?? SwiftTor() : ClearnetReq()
+    }
+    
+    public enum BitcoinNetwork {
+        case mainnet
+        case testnet
     }
     
     private func addPayload(payload: String, _ urlr: URLRequest) -> URLRequest {
