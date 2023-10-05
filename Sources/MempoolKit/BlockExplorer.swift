@@ -7,6 +7,7 @@
 
 import Foundation
 
+@available(iOS 13.0.0, macOS 12.0.0,  *)
 public protocol BlockExplorer {
     func addressTXS(address: String) async throws -> Transactions
     func recommendedFees() async throws -> RecommendedFees
