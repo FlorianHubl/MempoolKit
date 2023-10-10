@@ -8,6 +8,17 @@ extension Mempool: BlockExplorer {
     
     // General
     
+    /// Tests if the Server is connected
+    /// - Returns: True if its connected
+    public func testConnection() async -> Bool {
+        let a = try? await recommendedFees()
+        if a == nil {
+            return false
+        }else {
+            return true
+        }
+    }
+    
     /// Information about the difficulty adjustment such as previousRetarget, progressPercent and many more.
     /// - Returns: All Details about the difficulty adjustment: progressPercent, difficultyChange, estimatedRetargetDate, remainingBlocks, remainingTime, previousRetarget, nextRetargetHeight, timeAvg, timeOffset
     public func difficultyAdjustment() async throws -> DifficultyAdjustment {
