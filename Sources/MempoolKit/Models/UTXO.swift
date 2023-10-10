@@ -1,7 +1,7 @@
 
 import Foundation
 
-public struct UTXO: Codable {
+public struct UTXO: Codable, Hashable {
     public let txid: String
     public let vout: Int
     public let status: Status
@@ -16,7 +16,7 @@ public struct UTXO: Codable {
     
     public static let demo = UTXO(txid: "txid", vout: 21, status: Status(confirmed: true, block_height: 800000, block_hash: "block_hash", block_time: 800000), value: 21)
     
-    public struct Status: Codable {
+    public struct Status: Codable, Hashable {
         public let confirmed: Bool
         public let block_height: Int?
         public let block_hash: String?
