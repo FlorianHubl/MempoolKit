@@ -2,14 +2,14 @@ import Foundation
 import Network
 import SwiftTor
 
-@available(iOS 13.0, *)
+@available(iOS 13.0, macOS 10.15, *)
 struct ClearnetReq: RequestTyp {
     func request(request: URLRequest) async throws -> (Data, URLResponse) {
         return try await URLSession.shared.data(for: request)
     }
 }
 
-@available(iOS 13.0, *)
+@available(iOS 13.0, macOS 10.15, *)
 extension SwiftTor: RequestTyp {
     
 }
