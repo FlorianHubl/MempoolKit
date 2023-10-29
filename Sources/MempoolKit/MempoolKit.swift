@@ -38,6 +38,11 @@ public enum MempoolError: Error {
     case custom(String)
 }
 
+public enum BitcoinNetwork {
+    case mainnet
+    case testnet
+}
+
 /// The Main Struct of MempoolKit.
 ///
 /// Get data easy and quick from the Bitcoin Network through your own instance of Mempool or the official mempool.space api.
@@ -128,11 +133,6 @@ public struct Mempool {
         self.url = server
         self.debugMode = debugMode ?? false
         self.requestType = server.suffix(6) == ".onion" ? tor ?? SwiftTor() : ClearnetReq()
-    }
-    
-    public enum BitcoinNetwork {
-        case mainnet
-        case testnet
     }
     
     private func addPayload(payload: String, _ urlr: URLRequest) -> URLRequest {
