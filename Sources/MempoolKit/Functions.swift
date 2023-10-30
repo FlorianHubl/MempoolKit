@@ -442,6 +442,13 @@ extension Mempool: BlockExplorer {
         try await request(for: .lightningChannel, method: .get, type: [LightningChannelFromNodePubkey].self, extention: "?public_key=\(pubkey)&status=\(channelStatus.rawValue)", extWithSlash: false)
     }
     
+//    public func lightningNodeIPAddress(pubkey: String) async throws -> String {
+//        guard let url = URL(string: "https://mempool.space/lightning/node/\(pubkey)") else {throw MempoolError.custom("URL Error")}
+//        let result = try await URLSession.shared.data(from: url).0
+//        guard let a = String(data: result, encoding: .utf8) else {throw MempoolError.custom("String Error")}
+//        return a
+//    }
+    
     /// Lightning Channel Geodata
     /// - Returns: A list of channels with corresponding node geodata.
 //    public func lightningChannelGeodata() async throws -> [[]] {
