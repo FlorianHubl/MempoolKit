@@ -144,12 +144,12 @@ final class MempoolKitTests: XCTestCase {
         }
     }
     
-//    @available(iOS 13.0.0, *)
-//    func testLightningNodeIPAddress() async throws {
-//        let mempool = Mempool()
-//        let ip = try await mempool.lightningNodeIPAddress(pubkey: "03864ef025fde8fb587d989186ce6a4a186895ee44a926bfc370e2c366597a3f8f")
-//        print(ip)
-//    }
+    @available(iOS 13.0.0, *)
+    func testLightningNodeIPAddress() async throws {
+        let mempool = Mempool()
+        let node = try await mempool.lightningNodeStatistic(pubKey: "03864ef025fde8fb587d989186ce6a4a186895ee44a926bfc370e2c366597a3f8f")
+        print(node.sockets)
+    }
     
     @available(iOS 13.0.0, *)
     func testNetTest() async throws {

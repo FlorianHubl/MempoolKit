@@ -14,7 +14,6 @@ public struct LightningNodes: Codable {
         public let public_key, alias: String
         public let capacity, channels: Int?
         public let status: Int
-        public let color, sockets: String
     }
 }
 
