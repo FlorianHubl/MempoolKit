@@ -159,10 +159,17 @@ final class MempoolKitTests: XCTestCase {
     }
     
     @available(iOS 13.0.0, *)
-    func testTestnetLightning() async throws {
+    func testTestnetLightningNodes() async throws {
         let mempool = Mempool(network: .testnet, debugMode: true)
         let nodes = try await mempool.lightningTop100Nodes()
         print(nodes.topByCapacity)
+    }
+    
+    @available(iOS 13.0.0, *)
+    func testTestnetLightningNode() async throws {
+        let mempool = Mempool(network: .testnet, debugMode: true)
+        let node = try await mempool.lightningNodeStatistic(pubKey: "038863cf8ab91046230f561cd5b386cbff8309fa02e3f0c3ed161a3aeb64a643b9")
+        print(node)
     }
 }
 

@@ -30,7 +30,7 @@ public struct LightningNodeStatistic: Codable {
     }
     
     public struct Subdivision: Codable {
-        public let de, en, es, fr: String
-        public let ru: String
+        public let de, en, es, fr: String?
+        public let ru: String?
     }
 }
