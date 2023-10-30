@@ -157,6 +157,13 @@ final class MempoolKitTests: XCTestCase {
         let fees = try await mempool.addressTXS(address: "mgWFkrrMys8XCcZRzP21sHc7xQU7nkcc1H")
         print(fees)
     }
+    
+    @available(iOS 13.0.0, *)
+    func testTestnetLightning() async throws {
+        let mempool = Mempool(network: .testnet, debugMode: true)
+        let nodes = try await mempool.lightningTop100Nodes()
+        print(nodes.topByCapacity)
+    }
 }
 
 
